@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc5",
+                    "tertiary": "#713d10",
+                    "on-secondary-container": "#286d67",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#9becf7",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "background": "#f8f9fa",
+                    "surface": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004f56",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-dim": "#d9dadb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#82d3de",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb783",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "secondary-fixed": "#acefe7",
+                    "surface-container-low": "#f3f4f5",
+                    "outline-variant": "#bec8ca",
+                    "primary-fixed-dim": "#82d3de",
+                    "on-background": "#191c1d",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error": "#ffffff",
+                    "primary-container": "#006d77",
+                    "primary": "#00535b",
+                    "on-tertiary-fixed": "#301400",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#6f797a",
+                    "surface-tint": "#006972",
+                    "surface-bright": "#f8f9fa",
+                    "primary-fixed": "#9ff0fb",
+                    "secondary": "#236863",
+                    "on-surface-variant": "#3e494a",
+                    "on-tertiary-container": "#ffd7bd",
+                    "on-primary-fixed": "#001f23",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#8e5426",
+                    "on-tertiary-fixed-variant": "#6d390c",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#00201e",
+                    "secondary-container": "#a9ece5",
+                    "surface-container-highest": "#e1e3e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "1rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pb-safe-offset-2 { padding-bottom: calc(0.5rem + env(safe-area-inset-bottom)); }
+        .tonal-transition { transition: background-color 0.3s ease; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="professional headshot of a young man with a friendly expression, soft studio lighting, clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYdPaAgOZPoQhXlrEYgw4YkiXyGTMW5ERcfCITjNqhvU7iBSs8r5rICmhNnAMUP923tQWH4AyQZmAYkXIpvb4eVDNaQhRscI8xoOo-aQDCBDWdiVI-Cc7DMtd35b0j5-XzYNJTHxQucxgcgJPgt6fcMFwVZ1z1DYKEKdDxoWuQo3Yb-lDLfYB1WNLJBw7ySzQSw3b4emfarl2aCJIbVwj_xFck1e5oyIuGaylZkHmYZfs3Syv5ItGuNNWJgLH5AUIIEGp-pldhOvaN"/>
+</div>
+<span class="font-manrope font-extrabold text-teal-800 dark:text-teal-200 tracking-tighter text-lg">FacePay</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors">
+<span class="material-symbols-outlined text-teal-900">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-6 space-y-8 max-w-md mx-auto">
+<!-- Greeting Section -->
+<section class="space-y-1">
+<h1 class="text-3xl font-headline font-extrabold tracking-tight text-on-surface">Hello, Arjun</h1>
+<p class="text-on-surface-variant text-sm font-medium">Ready for your next seamless payment?</p>
+</section>
+<!-- Balance Card: Hero Component -->
+<section class="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-container p-8 text-on-primary-container shadow-xl">
+<!-- Decorative Grain/Texture -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+<div class="relative z-10 space-y-6">
+<div class="flex justify-between items-start">
+<span class="text-sm font-bold uppercase tracking-widest opacity-80">Demo Balance</span>
+<span class="material-symbols-outlined">contactless</span>
+</div>
+<div class="space-y-1">
+<h2 class="text-4xl font-extrabold tracking-tight text-on-primary-container">₹12,450.00</h2>
+<p class="text-xs font-medium opacity-70">Secured with FaceID Active</p>
+</div>
+<div class="flex items-center gap-2 pt-2">
+<div class="h-1.5 w-12 rounded-full bg-on-primary-container/30"></div>
+<div class="h-1.5 w-4 rounded-full bg-on-primary-container"></div>
+</div>
+</div>
+</section>
+<!-- Quick Action Icons -->
+<section class="grid grid-cols-4 gap-4">
+<div class="flex flex-col items-center gap-2">
+<button class="w-14 h-14 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-center hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined text-[28px]">send</span>
+</button>
+<span class="text-[11px] font-bold text-on-surface-variant">Send</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<button class="w-14 h-14 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-center hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined text-[28px]">qr_code_scanner</span>
+</button>
+<span class="text-[11px] font-bold text-on-surface-variant">Receive</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<button class="w-14 h-14 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-center hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined text-[28px]">history</span>
+</button>
+<span class="text-[11px] font-bold text-on-surface-variant">History</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<button class="w-14 h-14 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-center hover:bg-surface-container-high transition-colors text-primary">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<span class="text-[11px] font-bold text-on-surface-variant">Add Funds</span>
+</div>
+</section>
+<!-- Recent Transactions -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="text-lg font-bold text-on-surface">Recent Transactions</h3>
+<button class="text-primary text-xs font-bold px-3 py-1 rounded-full bg-secondary-container/30">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Transaction Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between group transition-all hover:bg-surface-container-low">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">call_made</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Sent to Rohan</p>
+<p class="text-xs text-on-surface-variant">Today, 2:45 PM</p>
+</div>
+</div>
+<p class="font-extrabold text-on-surface">-₹2,500.00</p>
+</div>
+<!-- Transaction Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between group transition-all hover:bg-surface-container-low">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">call_received</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Received from Priya</p>
+<p class="text-xs text-on-surface-variant">Yesterday</p>
+</div>
+</div>
+<p class="font-extrabold text-secondary">+₹1,200.00</p>
+</div>
+<!-- Transaction Item 3 (Contextual fill) -->
+<div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between group transition-all hover:bg-surface-container-low">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Starbucks Coffee</p>
+<p class="text-xs text-on-surface-variant">Nov 22, 2023</p>
+</div>
+</div>
+<p class="font-extrabold text-on-surface">-₹450.00</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_-8px_24px_rgba(0,0,0,0.06)] flex justify-around items-center w-full px-2 pt-2 pb-safe-offset-2">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center bg-teal-100/50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-2xl px-4 py-1 scale-95 duration-200 active:scale-90 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-manrope font-medium text-[10px]">Home</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 scale-95 duration-200 active:scale-90 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-manrope font-medium text-[10px]">History</span>
+</a>
+<!-- Receive -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 scale-95 duration-200 active:scale-90 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-manrope font-medium text-[10px]">Receive</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 scale-95 duration-200 active:scale-90 hover:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-manrope font-medium text-[10px]">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc5",
+                    "tertiary": "#713d10",
+                    "on-secondary-container": "#286d67",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#9becf7",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "background": "#f8f9fa",
+                    "surface": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004f56",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-dim": "#d9dadb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#82d3de",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb783",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "secondary-fixed": "#acefe7",
+                    "surface-container-low": "#f3f4f5",
+                    "outline-variant": "#bec8ca",
+                    "primary-fixed-dim": "#82d3de",
+                    "on-background": "#191c1d",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error": "#ffffff",
+                    "primary-container": "#006d77",
+                    "primary": "#00535b",
+                    "on-tertiary-fixed": "#301400",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#6f797a",
+                    "surface-tint": "#006972",
+                    "surface-bright": "#f8f9fa",
+                    "primary-fixed": "#9ff0fb",
+                    "secondary": "#236863",
+                    "on-surface-variant": "#3e494a",
+                    "on-tertiary-container": "#ffd7bd",
+                    "on-primary-fixed": "#001f23",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#8e5426",
+                    "on-tertiary-fixed-variant": "#6d390c",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#00201e",
+                    "secondary-container": "#a9ece5",
+                    "surface-container-highest": "#e1e3e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .biometric-overlay {
+            mask-image: radial-gradient(circle 140px at center, transparent 100%, black 100%);
+            -webkit-mask-image: radial-gradient(circle 140px at center, transparent 100%, black 100%);
+        }
+        .scanning-ring {
+            border: 4px solid transparent;
+            border-top-color: #9ff0fb;
+            border-right-color: #9ff0fb;
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl text-teal-900 dark:text-teal-100 flex justify-between items-center px-6 h-16 w-full">
+<button class="hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors rounded-full p-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-manrope font-extrabold text-teal-800 dark:text-teal-200 tracking-tighter text-lg">FacePay</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content: Full Screen Camera View -->
+<main class="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+<!-- Live Camera Feed Simulation -->
+<div class="absolute inset-0 z-0">
+<img alt="Portrait of a young man centered in frame" class="w-full h-full object-cover" data-alt="Close up portrait of a young man with neutral expression looking directly at camera, soft studio lighting, modern minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByJ9Wi9D0X2aAIof4mbElqA0TpmXPr-P13Feb3vfta-os7pmXJxpt_QbsPDVern2IHc5ztEgUqyjVyUtQMmbocBHk6cCwFUhOaII188id5n4-95nWJoj5Ixp6pZN4afSsLFf--vitei3YdXJfuP2sF83TdM98-NDD5s1YLAC3CvlgGGNUirpw8e41gGkOU_66hCCQ8TcQdSxiNi1vRjHFW1K9xPCEuhVwjRKlq5zSCGjLdZzBvjKfaf7jQbP_W4XPh4UYDgEZzQNY6"/>
+</div>
+<!-- Glassmorphism Scrim Overlay -->
+<div class="absolute inset-0 z-10 bg-primary/40 backdrop-blur-sm biometric-overlay"></div>
+<!-- Face Frame & Progress Ring -->
+<div class="relative z-20 w-72 h-72 flex items-center justify-center">
+<!-- Outer Scanning Ring -->
+<div class="absolute w-full h-full rounded-full border-2 border-primary-fixed/20"></div>
+<div class="absolute w-full h-full rounded-full scanning-ring"></div>
+<!-- Face Guides -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-64 h-64 border-2 border-dashed border-primary-fixed/50 rounded-full"></div>
+</div>
+<!-- Focus Corners -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary-fixed rounded-tl-2xl"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary-fixed rounded-tr-2xl"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary-fixed rounded-bl-2xl"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary-fixed rounded-br-2xl"></div>
+</div>
+<!-- Feedback UI -->
+<div class="absolute bottom-32 z-30 flex flex-col items-center w-full px-8 text-center">
+<div class="bg-surface-container-lowest/80 backdrop-blur-md px-6 py-4 rounded-3xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] max-w-sm w-full">
+<div class="flex items-center justify-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<p class="text-on-surface-variant font-semibold tracking-wide uppercase text-[10px]">Scanning in progress</p>
+</div>
+<h2 class="text-on-surface font-bold text-xl mb-1">Confirming Identity...</h2>
+<p class="text-primary font-extrabold text-lg tracking-tight">Blink twice to confirm</p>
+</div>
+<!-- Privacy Microcopy -->
+<div class="mt-8 flex items-center gap-2 text-primary-fixed/90">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<p class="text-[11px] font-medium tracking-wide uppercase">Biometric data is encrypted and never shared</p>
+</div>
+</div>
+<!-- Active Scanning Indicator -->
+<div class="absolute top-24 z-30 px-4 py-1.5 bg-error/10 backdrop-blur-md rounded-full border border-error/20">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error animate-ping"></div>
+<span class="text-on-background font-bold text-[10px] tracking-widest uppercase">Live</span>
+</div>
+</div>
+</main>
+<!-- Navigation Shell Suppressed for Focus Flow -->
+<!-- Manual Action (Fallback) -->
+<div class="fixed bottom-8 left-0 w-full z-40 px-8">
+<button class="w-full h-14 bg-surface-container-low/20 backdrop-blur-lg border border-white/10 rounded-2xl flex items-center justify-center gap-3 text-white font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">help_center</span>
+<span class="text-sm">Having trouble?</span>
+</button>
+</div>
+</body></html>

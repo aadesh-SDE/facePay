@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc5",
+                    "tertiary": "#713d10",
+                    "on-secondary-container": "#286d67",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#9becf7",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "background": "#f8f9fa",
+                    "surface": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004f56",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-dim": "#d9dadb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#82d3de",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb783",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "secondary-fixed": "#acefe7",
+                    "surface-container-low": "#f3f4f5",
+                    "outline-variant": "#bec8ca",
+                    "primary-fixed-dim": "#82d3de",
+                    "on-background": "#191c1d",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error": "#ffffff",
+                    "primary-container": "#006d77",
+                    "primary": "#00535b",
+                    "on-tertiary-fixed": "#301400",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#6f797a",
+                    "surface-tint": "#006972",
+                    "surface-bright": "#f8f9fa",
+                    "primary-fixed": "#9ff0fb",
+                    "secondary": "#236863",
+                    "on-surface-variant": "#3e494a",
+                    "on-tertiary-container": "#ffd7bd",
+                    "on-primary-fixed": "#001f23",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#8e5426",
+                    "on-tertiary-fixed-variant": "#6d390c",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#00201e",
+                    "secondary-container": "#a9ece5",
+                    "surface-container-highest": "#e1e3e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .pb-safe-offset-2 {
+            padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen">
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-colors duration-200 active:scale-95">
+<span class="material-symbols-outlined text-teal-900">arrow_back</span>
+</button>
+<h1 class="font-manrope font-extrabold text-teal-800 tracking-tighter text-lg">FacePay</h1>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-md mx-auto">
+<!-- Hero Profile Section -->
+<section class="flex flex-col items-center mb-12">
+<div class="relative mb-6">
+<div class="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg ring-1 ring-outline-variant/15">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a professional woman with a warm expression, soft natural sunlight, minimalist neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX9rw4MoSeZO-FQ51l9StGBMv_PA2sTiV0xJ3sBvUgKl0NAMV0_lcXOtEyleQzo2G3C1UnJILC157PM_ez3-R_3fgI2KbbARA3Gkkd1O0l6IgOdktliSeRFqVTbiCf9wgCWYxzjp0QO2XmSsbD83tkrzkzZQiZnhJvvCXjtAMDibb5iW_h6e6FY0GtZLgA1meWBfRVjq8jTuOv_nKhDesVuduulX4QlPX-eeojLuM2Ey4uKygNz1tIbgF0o3GU6yPwjrLaRCLsmKJC"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="text-center">
+<h2 class="text-2xl font-bold text-on-surface tracking-tight">Elena Rodriguez</h2>
+<p class="text-on-surface-variant text-sm font-medium">+1 (555) 012-3456</p>
+</div>
+</section>
+<!-- Security Status Bento Card -->
+<section class="bg-primary-container rounded-xl p-6 mb-10 text-on-primary-container relative overflow-hidden shadow-sm">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-teal-100">security</span>
+<span class="font-bold text-sm uppercase tracking-widest opacity-80">Security Health</span>
+</div>
+<p class="text-xl font-bold mb-4">Account is 85% Secure</p>
+<div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-teal-200 h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Decorative circle gradient -->
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-teal-500/20 rounded-full blur-2xl"></div>
+</section>
+<!-- Minimalist Settings List -->
+<nav class="flex flex-col gap-1">
+<div class="group py-5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">face_retouching_natural</span>
+</div>
+<span class="font-semibold text-on-surface">Face Recognition Settings</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<div class="group py-5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all border-t border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">privacy_tip</span>
+</div>
+<span class="font-semibold text-on-surface">Security &amp; Privacy</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<div class="group py-5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all border-t border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">devices</span>
+</div>
+<span class="font-semibold text-on-surface">Device Sessions</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<div class="group py-5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all border-t border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">help</span>
+</div>
+<span class="font-semibold text-on-surface">Help &amp; Support</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<div class="group py-5 flex items-center justify-between cursor-pointer active:scale-[0.98] transition-all border-t border-outline-variant/10 mt-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">logout</span>
+</div>
+<span class="font-bold text-error">Logout</span>
+</div>
+</div>
+</nav>
+</main>
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_-8px_24px_rgba(0,0,0,0.06)]">
+<div class="flex justify-around items-center w-full px-2 pt-2 pb-safe-offset-2">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 hover:opacity-80 transition-opacity active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-manrope font-medium text-[10px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 hover:opacity-80 transition-opacity active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">history</span>
+<span class="font-manrope font-medium text-[10px]">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 hover:opacity-80 transition-opacity active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span class="font-manrope font-medium text-[10px]">Receive</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-teal-100/50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-2xl px-4 py-1 hover:opacity-80 transition-opacity active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-manrope font-medium text-[10px]">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

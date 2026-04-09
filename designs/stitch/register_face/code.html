@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FacePay - Register Your Face</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcc5",
+                        "tertiary": "#713d10",
+                        "on-secondary-container": "#286d67",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#9becf7",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "background": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004f56",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-dim": "#d9dadb",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#82d3de",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "secondary-fixed": "#acefe7",
+                        "surface-container-low": "#f3f4f5",
+                        "outline-variant": "#bec8ca",
+                        "primary-fixed-dim": "#82d3de",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error": "#ffffff",
+                        "primary-container": "#006d77",
+                        "primary": "#00535b",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-variant": "#e1e3e4",
+                        "outline": "#6f797a",
+                        "surface-tint": "#006972",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#9ff0fb",
+                        "secondary": "#236863",
+                        "on-surface-variant": "#3e494a",
+                        "on-tertiary-container": "#ffd7bd",
+                        "on-primary-fixed": "#001f23",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-container": "#8e5426",
+                        "on-tertiary-fixed-variant": "#6d390c",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#00201e",
+                        "secondary-container": "#a9ece5",
+                        "surface-container-highest": "#e1e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .biometric-scanner-ring {
+            box-shadow: 0 0 0 9999px rgba(0, 83, 91, 0.4);
+            backdrop-filter: blur(8px);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-200/50 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-teal-900" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-manrope font-bold text-lg tracking-tight text-teal-900">Register Your Face</h1>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</header>
+<main class="flex-grow pt-16 pb-12 flex flex-col items-center px-6">
+<!-- Instructional Content -->
+<div class="w-full max-w-md mt-6 mb-8 text-center">
+<h2 class="text-2xl font-headline font-extrabold text-primary mb-2">Center your face in the frame</h2>
+<p class="text-on-surface-variant text-sm px-4">Adjust your position until the frame turns green. Ensure your entire face is visible.</p>
+</div>
+<!-- Biometric Scanner Frame -->
+<div class="relative w-full aspect-square max-w-[320px] mb-10 group">
+<!-- Simulated Camera Feed -->
+<div class="absolute inset-0 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="Biometric portrait focus" class="w-full h-full object-cover opacity-60 grayscale-[0.3]" data-alt="Close-up portrait of a person centered in frame with soft studio lighting and a clean neutral background for facial recognition demo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ4P3neYpCZ-_dj9ziQGQLLx0oukZX2uG9y-3CZyWhOrCm3RzZTsoMJWuNvCspyqJjdXU0IFn_BphaaEvJjhaqIt-ZL_H7ynYUq8-3IJ1sTsZG9bwE4ZiX9Ajxj1SkFEV38hOPds_OjZbNTPq6HtoYc8qYZ0aLmUlwEpx7rNuPpFWBqpR7gkkImXjOEiTzPHdtm9Mgq55sFTMHW7RtokHUZ1GYAYoZE9Jc7dd99tEZsTFd8idu3waFC4TNMRw6hp2fhH5m4DfW8qTl"/>
+</div>
+<!-- Scanning Overlay -->
+<div class="absolute inset-0 rounded-full border-[6px] border-primary-fixed-dim/40 biometric-scanner-ring flex items-center justify-center">
+<!-- Visual Scan Lines / Decorative Guides -->
+<div class="absolute w-[110%] h-[1px] bg-primary/20 top-1/4 animate-pulse"></div>
+<div class="absolute w-[110%] h-[1px] bg-primary/20 top-1/2 animate-pulse"></div>
+<div class="absolute w-[110%] h-[1px] bg-primary/20 top-3/4 animate-pulse"></div>
+<!-- Corner Focus Brackets -->
+<div class="absolute top-10 left-10 w-8 h-8 border-t-4 border-l-4 border-primary rounded-tl-lg"></div>
+<div class="absolute top-10 right-10 w-8 h-8 border-t-4 border-r-4 border-primary rounded-tr-lg"></div>
+<div class="absolute bottom-10 left-10 w-8 h-8 border-b-4 border-l-4 border-primary rounded-bl-lg"></div>
+<div class="absolute bottom-10 right-10 w-8 h-8 border-b-4 border-r-4 border-primary rounded-br-lg"></div>
+</div>
+</div>
+<!-- Tips Bento Grid -->
+<div class="w-full max-w-md grid grid-cols-2 gap-3 mb-10">
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="light_mode">light_mode</span>
+<span class="text-xs font-bold text-on-surface leading-tight">Find a well-lit area</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="visibility_off">visibility_off</span>
+<span class="text-xs font-bold text-on-surface leading-tight">Remove glasses/mask</span>
+</div>
+</div>
+<!-- Privacy & Progress Area -->
+<div class="w-full max-w-md mt-auto">
+<!-- Privacy Label -->
+<div class="flex items-center justify-center gap-2 mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span class="text-[11px] font-medium tracking-wide">Face data processed locally for demo</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mb-8 overflow-hidden">
+<div class="bg-primary h-full w-1/3 rounded-full"></div>
+</div>
+<!-- Start Button -->
+<button class="w-full py-4 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold text-lg shadow-lg active:scale-95 transition-transform">
+                Start Scan
+            </button>
+</div>
+</main>
+<!-- Suppressed BottomNavBar for Transactional Flow -->
+</body></html>

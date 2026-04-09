@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc5",
+                    "tertiary": "#713d10",
+                    "on-secondary-container": "#286d67",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#9becf7",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "background": "#f8f9fa",
+                    "surface": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004f56",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-dim": "#d9dadb",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#82d3de",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb783",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "secondary-fixed": "#acefe7",
+                    "surface-container-low": "#f3f4f5",
+                    "outline-variant": "#bec8ca",
+                    "primary-fixed-dim": "#82d3de",
+                    "on-background": "#191c1d",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error": "#ffffff",
+                    "primary-container": "#006d77",
+                    "primary": "#00535b",
+                    "on-tertiary-fixed": "#301400",
+                    "surface-variant": "#e1e3e4",
+                    "outline": "#6f797a",
+                    "surface-tint": "#006972",
+                    "surface-bright": "#f8f9fa",
+                    "primary-fixed": "#9ff0fb",
+                    "secondary": "#236863",
+                    "on-surface-variant": "#3e494a",
+                    "on-tertiary-container": "#ffd7bd",
+                    "on-primary-fixed": "#001f23",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#8e5426",
+                    "on-tertiary-fixed-variant": "#6d390c",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#00201e",
+                    "secondary-container": "#a9ece5",
+                    "surface-container-highest": "#e1e3e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .receipt-cut {
+            mask-image: radial-gradient(circle at 10px 100%, transparent 10px, white 11px);
+            mask-size: 20px 100%;
+            mask-repeat: repeat-x;
+        }
+        .bg-success-gradient {
+            background: linear-gradient(135deg, #006d77 0%, #00535b 100%);
+        }
+        .whisper-shadow {
+            box-shadow: 0 8px 24px rgba(25, 28, 29, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen">
+<!-- Top Navigation (Shell Suprpressed for Transactional Focus, showing simple brand) -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="font-manrope font-extrabold text-teal-800 dark:text-teal-200 tracking-tighter text-lg">FacePay</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-secondary-container rounded-full">
+<span class="material-symbols-outlined text-[18px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[12px] font-bold text-on-secondary-container tracking-tight">SECURE</span>
+</div>
+</header>
+<main class="pt-24 pb-12 px-6 flex flex-col items-center max-w-md mx-auto">
+<!-- Success State Indicator -->
+<div class="mb-8 relative">
+<div class="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center relative z-10">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="absolute inset-0 bg-primary-fixed blur-2xl opacity-30 animate-pulse"></div>
+</div>
+<div class="text-center mb-8">
+<h1 class="text-3xl font-headline font-extrabold text-on-surface tracking-tight mb-2">₹500.00</h1>
+<p class="text-primary font-semibold tracking-wide uppercase text-xs">Sent Successfully</p>
+</div>
+<!-- Receipt Card with Subtle Depth -->
+<div class="w-full bg-surface-container-lowest rounded-xl whisper-shadow overflow-hidden relative border border-outline-variant/10">
+<!-- Decorative Receipt Detail Layer -->
+<div class="h-1 bg-success-gradient w-full"></div>
+<div class="p-6 space-y-6">
+<!-- Recipient Info -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a smiling young Indian woman in professional attire with a soft, warm outdoor background lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIMH4tHw9OLdiGXyl9X3RBm9_ZfBcnx9vqSb4kJsuek46dmkggZ-yd5U3xqKjIkIrrnPKGrbGfnwv1Hz1T0RXePPhgG5o4TaD-MOL9Ar99KUSYUDzRep1d9dC0MgQCWvwT5Us9uToM9tTmJCOLlGhEEQYXl9Kryi2suPN1out88gy6rGPOhaJLb8pEX891Ae3nqRQcG3vwYngNJPwS2dwoeoCvcgmsc_7F-FTg6Ohk9BQjMd70BIz8hp81ZkP07o4VX2EVa7Fy6xOp"/>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">To</p>
+<p class="text-base font-bold text-on-surface">Priya Sharma</p>
+<p class="text-sm text-on-surface-variant">+91 98XXX X8902</p>
+</div>
+</div>
+<!-- Transaction Details Grid -->
+<div class="grid grid-cols-2 gap-y-6 pt-6 border-t border-dashed border-outline-variant/30">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Transaction ID</p>
+<p class="text-sm font-semibold text-on-surface">FP983422109</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Status</p>
+<div class="inline-flex items-center gap-1 text-primary">
+<span class="text-sm font-bold">Completed</span>
+</div>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Date</p>
+<p class="text-sm font-semibold text-on-surface">Oct 24, 2023</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest mb-1">Time</p>
+<p class="text-sm font-semibold text-on-surface">02:45 PM</p>
+</div>
+<div class="col-span-2 bg-surface-container-low p-4 rounded-lg flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance">account_balance</span>
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold">Paid via HDFC Bank</p>
+<p class="text-xs font-semibold">**** 8890</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="info">info</span>
+</div>
+</div>
+</div>
+<!-- Receipt Bottom Texture -->
+<div class="h-4 bg-surface-container-low w-full relative">
+<div class="absolute bottom-0 left-0 right-0 flex justify-around">
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+<div class="w-4 h-4 bg-surface rounded-full -mb-2"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full mt-10 space-y-3">
+<button class="w-full h-14 bg-success-gradient text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                Done
+            </button>
+<button class="w-full h-14 bg-surface-container-high text-on-surface font-bold rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="share">share</span>
+                Share Receipt
+            </button>
+</div>
+<!-- Secondary Meta Info -->
+<div class="mt-8 text-center px-4">
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                A confirmation email has been sent to your registered address. For support, please contact help@facepay.io
+            </p>
+</div>
+</main>
+<!-- Bottom Shell Suppressed for Transactional screen (Done button leads home) -->
+</body></html>

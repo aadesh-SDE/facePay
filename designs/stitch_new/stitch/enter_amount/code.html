@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>FacePay - Enter Amount</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcc5",
+                        "tertiary": "#713d10",
+                        "on-secondary-container": "#286d67",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#9becf7",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "background": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004f56",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-dim": "#d9dadb",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#82d3de",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "secondary-fixed": "#acefe7",
+                        "surface-container-low": "#f3f4f5",
+                        "outline-variant": "#bec8ca",
+                        "primary-fixed-dim": "#82d3de",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error": "#ffffff",
+                        "primary-container": "#006d77",
+                        "primary": "#00535b",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-variant": "#e1e3e4",
+                        "outline": "#6f797a",
+                        "surface-tint": "#006972",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#9ff0fb",
+                        "secondary": "#236863",
+                        "on-surface-variant": "#3e494a",
+                        "on-tertiary-container": "#ffd7bd",
+                        "on-primary-fixed": "#001f23",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-container": "#8e5426",
+                        "on-tertiary-fixed-variant": "#6d390c",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#00201e",
+                        "secondary-container": "#a9ece5",
+                        "surface-container-highest": "#e1e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar Shell (Suppressed for focused Transactional Journey) -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="p-2 -ml-2 hover:bg-slate-200/50 transition-colors scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined text-teal-900">arrow_back</span>
+</button>
+<h1 class="font-manrope font-bold text-lg tracking-tight text-teal-900">FacePay</h1>
+</div>
+<div class="w-10"></div> <!-- Spacer -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col pt-20 pb-8 px-6">
+<!-- Recipient Info Card (Bento Style) -->
+<section class="mb-8">
+<div class="bg-surface-container-lowest rounded-xl p-4 flex items-center gap-4 shadow-[0_8px_24px_rgba(0,0,0,0.04)]">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-secondary-container flex items-center justify-center">
+<img alt="Recipient portrait" class="w-full h-full object-cover" data-alt="Professional studio portrait of a young Indian woman with a warm smile and dark hair, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7yIxdLrCyPwn-oIy0ai15EP9U-PkaUTdT-nwOg4bFLaXXbGqH2NtGO7vvN2FDUVL59oy4XpAUxNkD4pFZxWnMXNQpzjN_rh0f3NtRAeBXK9g3M3gUikrpjGgctRV0vGhtoL-9hvyKcX3ikZmGmYc1oGjp0Bvt9TSvEI4ymSgWFcKTTAeyt0FqqCqf1J-ZCsXoIrvVz82xp9i9RpsuPtJS83TJ_Z4nL3pU-EKzE8KZ0vGP6hb-Hm8EX65gTbroUtXnWoz3mPro6OG6"/>
+</div>
+<div class="flex flex-col">
+<span class="text-on-surface-variant text-xs font-medium tracking-wide">Sending to</span>
+<span class="text-on-surface font-bold text-base">Priya Sharma • ...8902</span>
+</div>
+</div>
+</section>
+<!-- Amount Display (Editorial Authority) -->
+<section class="flex-1 flex flex-col items-center justify-center space-y-2">
+<div class="flex items-baseline gap-1 text-primary">
+<span class="text-3xl font-bold">₹</span>
+<span class="text-7xl font-extrabold tracking-tighter">5,000</span>
+</div>
+<!-- Error State Triggered: Insufficient Balance -->
+<div class="flex items-center gap-1.5 px-3 py-1 bg-error-container text-on-error-container rounded-full text-xs font-semibold">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">error</span>
+<span>Insufficient demo balance</span>
+</div>
+<!-- Optional Note Field -->
+<div class="mt-8 w-full max-w-xs">
+<div class="relative group">
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-center text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/40 transition-all text-sm" placeholder="Add a note (optional)" type="text"/>
+</div>
+</div>
+</section>
+<!-- Review Button (Primary CTA) -->
+<section class="mt-auto mb-6">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-4 rounded-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2">
+                Review Payment
+                <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</section>
+</main>
+<!-- Custom Numeric Keypad (Glassmorphism & Spatial Authority) -->
+<nav class="bg-surface-container-low/80 backdrop-blur-2xl rounded-t-[2.5rem] pt-6 pb-safe-offset-4 px-4 shadow-[0_-12px_40px_rgba(0,0,0,0.08)]">
+<div class="keypad-grid text-on-surface max-w-md mx-auto">
+<!-- Key 1 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">1</button>
+<!-- Key 2 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">2</button>
+<!-- Key 3 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">3</button>
+<!-- Key 4 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">4</button>
+<!-- Key 5 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">5</button>
+<!-- Key 6 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">6</button>
+<!-- Key 7 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">7</button>
+<!-- Key 8 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">8</button>
+<!-- Key 9 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">9</button>
+<!-- Key . -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">.</button>
+<!-- Key 0 -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">0</button>
+<!-- Key Backspace -->
+<button class="flex items-center justify-center h-16 text-2xl font-semibold hover:bg-surface-container-high rounded-xl transition-colors active:scale-90">
+<span class="material-symbols-outlined text-primary">backspace</span>
+</button>
+</div>
+</nav>
+<!-- Bottom Navigation Suppressed for Focused Task (Task-Focused Rule) -->
+</body></html>

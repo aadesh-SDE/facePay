@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Receive Money - FacePay</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcc5",
+                        "tertiary": "#713d10",
+                        "on-secondary-container": "#286d67",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#9becf7",
+                        "secondary-fixed-dim": "#90d3cb",
+                        "background": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004f56",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-dim": "#d9dadb",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#82d3de",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "on-secondary-fixed-variant": "#00504b",
+                        "secondary-fixed": "#acefe7",
+                        "surface-container-low": "#f3f4f5",
+                        "outline-variant": "#bec8ca",
+                        "primary-fixed-dim": "#82d3de",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error": "#ffffff",
+                        "primary-container": "#006d77",
+                        "primary": "#00535b",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-variant": "#e1e3e4",
+                        "outline": "#6f797a",
+                        "surface-tint": "#006972",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#9ff0fb",
+                        "secondary": "#236863",
+                        "on-surface-variant": "#3e494a",
+                        "on-tertiary-container": "#ffd7bd",
+                        "on-primary-fixed": "#001f23",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-container": "#8e5426",
+                        "on-tertiary-fixed-variant": "#6d390c",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#00201e",
+                        "secondary-container": "#a9ece5",
+                        "surface-container-highest": "#e1e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .qr-gradient {
+            background: radial-gradient(circle at top left, #006d77 0%, #00535b 100%);
+        }
+        .soft-mesh {
+            background-color: #f8f9fa;
+            background-image: radial-gradient(at 0% 0%, rgba(159, 240, 251, 0.15) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(35, 104, 99, 0.1) 0px, transparent 50%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col soft-mesh">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="p-2 -ml-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors rounded-full scale-95 duration-200">
+<span class="material-symbols-outlined text-teal-900 dark:text-teal-100" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-manrope font-extrabold text-teal-800 dark:text-teal-200 tracking-tighter text-lg">FacePay</h1>
+</div>
+<button class="p-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors rounded-full scale-95 duration-200">
+<span class="material-symbols-outlined text-teal-900 dark:text-teal-100" data-icon="more_vert">more_vert</span>
+</button>
+</header>
+<main class="flex-1 pt-24 pb-32 px-6 flex flex-col items-center max-w-md mx-auto w-full">
+<!-- Editorial Headline -->
+<div class="w-full text-center mb-8">
+<h2 class="text-3xl font-extrabold text-on-surface tracking-tight mb-2">Receive Money</h2>
+<p class="text-on-surface-variant font-medium">Show this to scan &amp; pay</p>
+</div>
+<!-- QR Code Bento Card -->
+<div class="w-full bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.04)] relative overflow-hidden group">
+<!-- Subtle Decorative Elements -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-fixed/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-12 -left-12 w-32 h-32 bg-secondary-container/20 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-center">
+<!-- QR Container with Glassmorphism Border -->
+<div class="p-4 rounded-[2.5rem] bg-surface-container-low border border-outline-variant/10 mb-8">
+<div class="w-64 h-64 bg-white p-4 rounded-3xl shadow-sm flex items-center justify-center relative">
+<img alt="QR Code for FacePay ID arjun.demo@facepay" class="w-full h-full rounded-xl" data-alt="a clean high-contrast black and white QR code on a white background with a modern minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_egDTQ_z02wZK4jT4pL6vwb-QwQsGYHiAVAC46dSKlJ0ZJy6Be2G2sOuRZz4hiPgwU0u-oRwyWw9E_UUwp5-GLOlt-H8CAvZ2ghquAjHQh03gWVXoj-dFPjmm4URa6tLUwELKm7bPQrmSIxd1TDb2Pd7RWiwQZgenpl2fZhC6GFmad2qFhTWuKYBJzFm7U4UQP1EpZ80vahfeBX7dlKmXEB8QAdy_j0Z1IPjGoQZ9v-ab-6A5SRyaI414tqJO54j_AkOcz7oQ4TJc"/>
+<!-- Branding over QR center -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="bg-white p-1.5 rounded-xl shadow-lg border border-surface-container">
+<div class="bg-primary-container p-1 rounded-lg">
+<span class="material-symbols-outlined text-white text-sm" data-icon="face" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ID Section -->
+<div class="flex flex-col items-center">
+<p class="text-xs uppercase tracking-[0.2em] font-black text-outline mb-1">My FacePay ID</p>
+<div class="flex items-center gap-2 bg-surface-container px-4 py-2 rounded-full mb-8">
+<span class="text-lg font-bold text-primary tracking-tight">arjun.demo@facepay</span>
+<button class="flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-base" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Action Button Group -->
+<div class="flex gap-4 w-full">
+<button class="flex-1 bg-surface-container-high hover:bg-surface-dim transition-colors h-14 rounded-2xl flex items-center justify-center gap-2 font-bold text-on-surface">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+                        Share
+                    </button>
+<button class="flex-1 bg-gradient-to-br from-primary to-primary-container text-white h-14 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Save
+                    </button>
+</div>
+</div>
+</div>
+<!-- Instructional Tip -->
+<div class="mt-10 flex items-start gap-4 p-5 bg-tertiary-fixed/30 rounded-3xl border border-tertiary-fixed/20 w-full">
+<div class="bg-tertiary text-white p-2 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-xl" data-icon="security">security</span>
+</div>
+<div>
+<h4 class="font-bold text-tertiary text-sm">Safe &amp; Private</h4>
+<p class="text-on-tertiary-fixed-variant text-xs mt-0.5 leading-relaxed">Payments are only processed once you confirm the sender's biometric identity on your screen.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-3xl bg-slate-50/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_-8px_24px_rgba(0,0,0,0.06)] flex justify-around items-center px-2 pt-2 pb-safe-offset-2">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 hover:opacity-80 transition-opacity scale-95 duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-0.5" data-icon="home">home</span>
+<span class="font-manrope font-medium text-[10px]">Home</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 hover:opacity-80 transition-opacity scale-95 duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-0.5" data-icon="history">history</span>
+<span class="font-manrope font-medium text-[10px]">History</span>
+</a>
+<!-- Receive (Active) -->
+<a class="flex flex-col items-center justify-center bg-teal-100/50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-2xl px-4 py-1 hover:opacity-80 transition-opacity scale-95 duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-0.5" data-icon="qr_code_scanner" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+<span class="font-manrope font-medium text-[10px]">Receive</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-4 py-1 hover:opacity-80 transition-opacity scale-95 duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl mb-0.5" data-icon="person">person</span>
+<span class="font-manrope font-medium text-[10px]">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FacePay - Verification Failed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f8f9fa",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#006d77",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#90d3cb",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-container-high": "#e7e8e9",
+                    "on-primary-container": "#9becf7",
+                    "outline": "#6f797a",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#8e5426",
+                    "surface-dim": "#d9dadb",
+                    "on-secondary-container": "#286d67",
+                    "on-primary-fixed-variant": "#004f56",
+                    "tertiary": "#713d10",
+                    "secondary-fixed": "#acefe7",
+                    "tertiary-fixed-dim": "#ffb783",
+                    "tertiary-fixed": "#ffdcc5",
+                    "outline-variant": "#bec8ca",
+                    "on-tertiary-fixed": "#301400",
+                    "secondary": "#236863",
+                    "primary": "#00535b",
+                    "inverse-surface": "#2e3132",
+                    "surface": "#f8f9fa",
+                    "on-primary-fixed": "#001f23",
+                    "surface-bright": "#f8f9fa",
+                    "on-tertiary-fixed-variant": "#6d390c",
+                    "surface-tint": "#006972",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#edeeef",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#9ff0fb",
+                    "on-surface": "#191c1d",
+                    "on-surface-variant": "#3e494a",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f3f4f5",
+                    "on-secondary-fixed": "#00201e",
+                    "primary-fixed-dim": "#82d3de",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#82d3de",
+                    "on-secondary-fixed-variant": "#00504b",
+                    "on-tertiary-container": "#ffd7bd",
+                    "on-background": "#191c1d",
+                    "secondary-container": "#a9ece5",
+                    "inverse-on-surface": "#f0f1f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.bg-camera-view {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuApnJoLPWFHitiq5wpANjz-y5YmqIpR5-vUTiEG2j6kqCSCCXi4zmZ70lj8pukiJG_uQJU5jPspTJpz1X30NZPkpoW98gQTOwf-ZxVEMO2ywNDU2VdWw9XrgJEmkWV3CjeznwAq1jKQJwU9bLHrd59C09ejrBmLiRK_2UaRFP_9wLXGdf-uXorYY20lcpX9hKgQ0aliRwtYHGkUFl2L7UpYQEmg1NdwyvlnF1ZqH_FzqF_i2whFsE2mB-yQ3xr4zPGCqKiF0AmjsAJW);
+    background-size: cover;
+    background-position: center
+    }
+.scanning-brackets {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border: 2px solid #ba1a1a;
+    border-radius: 48px;
+    mask: radial-gradient(circle at center, transparent 65%, black 66%)
+    }
+.bracket-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ba1a1a
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body bg-background text-on-surface antialiased selection:bg-primary-container selection:text-white">
+<main class="relative h-screen w-full max-w-[390px] mx-auto overflow-hidden bg-camera-view" data-alt="close-up of a man's face in high quality lighting, captured through a mobile camera lens with focus on features">
+<!-- Camera Overlay Scrim -->
+<div class="absolute inset-0 bg-black/30"></div>
+<!-- Header Shell (Suppressed Nav, Only Leading Action) -->
+<header class="w-full sticky top-0 z-50 flex items-center justify-between px-6 py-4 w-full">
+<div class="p-2 rounded-full hover:bg-white/20 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-white">arrow_back</span>
+</div>
+<h1 class="font-manrope text-lg font-semibold tracking-tight text-white">FacePay</h1>
+<div class="w-10"></div> <!-- Spacer for center alignment -->
+</header>
+<!-- Scanning Ring Area - FAILED State -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+<!-- Corner Brackets -->
+<div class="relative w-[280px] h-[280px]">
+<div class="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-error rounded-tl-3xl"></div>
+<div class="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-error rounded-tr-3xl"></div>
+<div class="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-error rounded-bl-3xl"></div>
+<div class="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-error rounded-br-3xl"></div>
+<!-- Main Error Ring -->
+<div class="absolute inset-4 rounded-full border-2 border-error/50 flex items-center justify-center">
+<div class="w-full h-full rounded-full border-4 border-error border-dashed opacity-80 scale-95"></div>
+</div>
+</div>
+</div>
+<!-- Glassmorphism Feedback Card & Actions -->
+<div class="absolute bottom-0 left-0 w-full px-6 pb-12 pt-8">
+<div class="bg-white/20 backdrop-blur-xl rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-2xl border border-white/20">
+<!-- Error Icon Container -->
+<div class="w-16 h-16 rounded-full bg-error flex items-center justify-center mb-6 shadow-lg shadow-error/20">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<!-- Attempt Chip -->
+<div class="bg-error-container px-4 py-1.5 rounded-full mb-4">
+<span class="text-on-error-container text-[11px] font-bold tracking-wider uppercase">Attempt 2 of 3</span>
+</div>
+<!-- Messaging -->
+<h2 class="text-2xl font-extrabold text-white mb-2 tracking-tight leading-tight">Verification Failed</h2>
+<p class="text-white/80 text-sm leading-relaxed max-w-[240px]">
+                    Face could not be matched. Please try again in good lighting.
+                </p>
+<!-- Action Buttons -->
+<div class="w-full mt-8 flex flex-col gap-4">
+<button class="w-full py-4 rounded-xl bg-gradient-to-r from-primary to-primary-container text-white font-bold text-base shadow-lg shadow-primary/20 active:scale-95 transition-transform duration-200">
+                        Try Again
+                    </button>
+<button class="w-full py-2 text-white/90 font-medium text-sm hover:text-white transition-colors active:scale-95">
+                        Cancel Payment
+                    </button>
+</div>
+</div>
+<!-- Privacy Microcopy -->
+<div class="mt-8 flex flex-col items-center gap-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-white/50 text-xs">lock</span>
+<p class="text-white/50 text-[10px] font-medium tracking-wide">
+                        Biometric data is encrypted and never shared
+                    </p>
+</div>
+</div>
+</div>
+</main>
+</body></html>
