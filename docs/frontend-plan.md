@@ -8,7 +8,7 @@
 - **Tailwind CSS v3** (matches Stitch exports)
 - **React Router v6** (client-side routing)
 - **Redux Toolkit** (auth, wallet, transactions state)
-- **face-api.js** (browser face detection + recognition + blink liveness)
+- **@vladmandic/face-api** (maintained fork of face-api.js — face detection, recognition, landmarks + custom EAR-based blink detection)
 - **Material Symbols** (icon font, same as designs)
 - **Manrope + Poppins** (Google Fonts, same as designs)
 
@@ -387,7 +387,9 @@ flowchart TD
     ProfileSlice --> ProfileAPI["profileApi (mock)"]
 ```
 
-## Face Detection with face-api.js
+## Face Detection with @vladmandic/face-api
+
+Uses `@vladmandic/face-api` (actively maintained fork of face-api.js) for all face-related tasks. Blink detection uses a custom EAR (Eye Aspect Ratio) function — no extra library needed.
 
 - **Load models** on app init: tinyFaceDetector, faceLandmark68Net, faceRecognitionNet
 - **Face registration** (`RegisterFacePage`): capture face descriptor from webcam, store in Redux + send to backend
@@ -395,7 +397,11 @@ flowchart TD
   1. Open camera stream via `navigator.mediaDevices.getUserMedia`
   2. Detect face using tinyFaceDetector
   3. Extract descriptor, compare with stored descriptor (Euclidean distance < 0.6 = match)
-  4. **Blink detection**: track eye aspect ratio (EAR) from landmarks; blink = EAR drops below threshold then recovers; require 2 blinks within 10 seconds
+  4. **Blink detection (EAR method)**: using 6 eye landmarks per eye from faceLandmark68Net:
+     - `EAR = (dist(p2,p6) + dist(p3,p5)) / (2 × dist(p1,p4))`
+     - Eye open: EAR ≈ 0.25–0.30 | Eye closed: EAR ≈ 0.05
+     - Blink = EAR drops below threshold (0.2) then recovers
+     - Require **2 blinks within 10 seconds** to confirm liveness
   5. On success: dispatch transaction; navigate to SuccessReceiptPage
   6. On failure: increment attempts; if < 3, show VerificationFailedPage with "Try Again"; if >= 3, lock and navigate home
 
@@ -461,7 +467,7 @@ flowchart LR
 
 ### Phase 2: Face Auth Feature
 - `features/faceAuth/`: types -> state (faceSlice + thunks) -> viewModel (useFaceViewModel) -> components (FaceScanner, BlinkDetector, ScannerRing) -> screens (RegisterFaceScreen, FaceVerificationScreen, VerificationFailedScreen)
-- `shared/services/faceService.ts`: face-api.js model loading, detect, compare, blink EAR logic
+- `shared/services/faceService.ts`: @vladmandic/face-api model loading, detect, compare, blink EAR logic
 - `shared/hooks/useCamera.ts`: getUserMedia wrapper
 - Wire auth flow: signup -> register face -> home
 
@@ -494,7 +500,7 @@ flowchart LR
 
 ## Key Libraries
 
-- `face-api.js` - face detection, landmarks, recognition
+- `@vladmandic/face-api` - face detection, landmarks, recognition (maintained fork)
 - `react-router-dom` - routing
 - `@reduxjs/toolkit` + `react-redux` - state
 - `qrcode.react` - QR code generation
