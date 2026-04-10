@@ -17,6 +17,10 @@ import { SelectRecipientPage } from "@/pages/selectRecipient/SelectRecipientPage
 import { EnterAmountPage } from "@/pages/enterAmount/EnterAmountPage";
 import { ReviewPaymentPage } from "@/pages/reviewPayment/ReviewPaymentPage";
 import { SuccessReceiptPage } from "@/pages/successReceipt/SuccessReceiptPage";
+import { HistoryPage } from "@/pages/history/HistoryPage";
+import { MyQRCodePage } from "@/pages/myQrCode/MyQRCodePage";
+import { ScanQRPage } from "@/pages/scanQr/ScanQRPage";
+import { ProfilePage } from "@/pages/profile/ProfilePage";
 
 function AuthGuard({ children }: { children: ReactNode }) {
   const isAuthenticated = useSelector(
@@ -112,6 +116,38 @@ const routes: RouteObject[] = [
     element: (
       <AuthGuard>
         <VerificationFailedPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/history",
+    element: (
+      <AuthGuard>
+        <HistoryPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/receive",
+    element: (
+      <AuthGuard>
+        <MyQRCodePage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/receive/scan",
+    element: (
+      <AuthGuard>
+        <ScanQRPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <AuthGuard>
+        <ProfilePage />
       </AuthGuard>
     ),
   },
