@@ -9,6 +9,9 @@ import type { ReactNode } from "react";
 
 import { LoginPage } from "@/pages/login/LoginPage";
 import { SignupPage } from "@/pages/signup/SignupPage";
+import { RegisterFacePage } from "@/pages/registerFace/RegisterFacePage";
+import { FaceVerificationPage } from "@/pages/faceVerification/FaceVerificationPage";
+import { VerificationFailedPage } from "@/pages/verificationFailed/VerificationFailedPage";
 
 function AuthGuard({ children }: { children: ReactNode }) {
   const isAuthenticated = useSelector(
@@ -55,7 +58,23 @@ const routes: RouteObject[] = [
     path: "/register-face",
     element: (
       <AuthGuard>
-        <PlaceholderPage title="Register Face" />
+        <RegisterFacePage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/send/verify",
+    element: (
+      <AuthGuard>
+        <FaceVerificationPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/send/verify/failed",
+    element: (
+      <AuthGuard>
+        <VerificationFailedPage />
       </AuthGuard>
     ),
   },

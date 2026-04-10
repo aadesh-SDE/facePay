@@ -23,4 +23,21 @@
   .bg-login-gradient {
     background: linear-gradient(135deg, #00535b 0%, #006d77 100%);
   }
+
+  .biometric-overlay {
+    mask-image: radial-gradient(circle 130px at center, transparent 100%, black 100%);
+    -webkit-mask-image: radial-gradient(circle 130px at center, transparent 100%, black 100%);
+  }
+
+  .scanning-ring {
+    border: 4px solid transparent;
+    border-top-color: #9ff0fb;
+    border-right-color: #9ff0fb;
+    animation: scan-spin 3s linear infinite;
+  }
+}
+
+@keyframes scan-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

@@ -30,7 +30,7 @@ const persistConfig = {
   key: "facepay",
   version: 1,
   storage: createWebStorage(),
-  whitelist: ["auth"],
+  whitelist: ["auth", "face"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
