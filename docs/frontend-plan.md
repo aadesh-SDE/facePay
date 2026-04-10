@@ -2,6 +2,12 @@
 
 # FacePay Frontend Development Plan
 
+## Production deployment (Vercel)
+
+- **Import:** Connect the GitHub repo and set **Root Directory** to `frontend`.
+- **Live site:** [https://facepay-bice.vercel.app/](https://facepay-bice.vercel.app/)
+- **Login:** [https://facepay-bice.vercel.app/login](https://facepay-bice.vercel.app/login) — SPA fallback is configured in `frontend/vercel.json` so direct links work after redeploy.
+
 ## Tech Stack
 
 - **React 18** + **Vite** + **TypeScript** (strict mode)
