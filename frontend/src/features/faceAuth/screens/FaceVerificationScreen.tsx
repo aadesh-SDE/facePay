@@ -4,9 +4,14 @@ import { useFaceViewModel } from "../viewModel/useFaceViewModel";
 import { FaceScanner } from "../components/FaceScanner";
 import { Icon } from "@/shared/components/ui/Icon";
 import type { VerifyStatus } from "../types/face.types";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "@/app/store";
+import { submitTransferThunk } from "@/features/send/state/sendThunks";
 
 export function FaceVerificationScreen() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const send = useSelector((state: RootState) => state.send);
   const {
     descriptor,
     blinkCount,
@@ -28,16 +33,25 @@ export function FaceVerificationScreen() {
   }, [registered, loadDescriptor]);
 
   const handleVerificationComplete = useCallback(
-    (success: boolean) => {
+    async (success: boolean) => {
       if (success) {
         updateStatus("success");
+        if (send.recipient && send.amount > 0) {
+          await dispatch(
+            submitTransferThunk({
+              recipientId: send.recipient.id,
+              amount: send.amount,
+              note: send.note || undefined,
+            }),
+          );
+        }
         setTimeout(() => navigate("/send/success"), 1200);
       } else {
         addAttempt();
         navigate("/send/verify/failed");
       }
     },
-    [navigate, updateStatus, addAttempt],
+    [navigate, updateStatus, addAttempt, dispatch, send.recipient, send.amount, send.note],
   );
 
   const handleStatusChange = useCallback(

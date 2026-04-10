@@ -13,6 +13,10 @@ import { RegisterFacePage } from "@/pages/registerFace/RegisterFacePage";
 import { FaceVerificationPage } from "@/pages/faceVerification/FaceVerificationPage";
 import { VerificationFailedPage } from "@/pages/verificationFailed/VerificationFailedPage";
 import { HomePage } from "@/pages/home/HomePage";
+import { SelectRecipientPage } from "@/pages/selectRecipient/SelectRecipientPage";
+import { EnterAmountPage } from "@/pages/enterAmount/EnterAmountPage";
+import { ReviewPaymentPage } from "@/pages/reviewPayment/ReviewPaymentPage";
+import { SuccessReceiptPage } from "@/pages/successReceipt/SuccessReceiptPage";
 
 function AuthGuard({ children }: { children: ReactNode }) {
   const isAuthenticated = useSelector(
@@ -60,6 +64,38 @@ const routes: RouteObject[] = [
     element: (
       <AuthGuard>
         <RegisterFacePage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/send",
+    element: (
+      <AuthGuard>
+        <SelectRecipientPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/send/amount",
+    element: (
+      <AuthGuard>
+        <EnterAmountPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/send/review",
+    element: (
+      <AuthGuard>
+        <ReviewPaymentPage />
+      </AuthGuard>
+    ),
+  },
+  {
+    path: "/send/success",
+    element: (
+      <AuthGuard>
+        <SuccessReceiptPage />
       </AuthGuard>
     ),
   },
