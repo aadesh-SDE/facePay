@@ -22,7 +22,7 @@ export function PageShell({
   className = "",
 }: PageShellProps) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col animate-page-in">
       {topBar && (
         <TopAppBar
           title={topBarTitle}
@@ -31,6 +31,7 @@ export function PageShell({
         />
       )}
       <main
+        role="main"
         className={`flex-1 ${topBar ? "pt-16" : ""} ${bottomNav ? "pb-20" : ""} ${className}`}
       >
         {children}

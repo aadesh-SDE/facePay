@@ -18,7 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className={`relative flex items-center bg-surface-container-highest rounded-xl px-4 h-14 group focus-within:ring-2 focus-within:ring-primary/20 transition-all ${error ? "ring-2 ring-error/40" : ""}`}
         >
           {icon && (
-            <span className="material-symbols-outlined text-outline mr-3 text-xl">
+            <span className="material-symbols-outlined text-outline mr-3 text-xl" aria-hidden="true">
               {icon}
             </span>
           )}
@@ -30,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {rightElement}
         </div>
         {error && (
-          <p className="text-error text-xs font-medium px-1">{error}</p>
+          <p role="alert" className="text-error text-xs font-medium px-1">{error}</p>
         )}
       </div>
     );

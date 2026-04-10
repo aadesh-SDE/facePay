@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/shared/utils/formatCurrency";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 interface BalanceCardProps {
   balance: number;
@@ -7,7 +8,10 @@ interface BalanceCardProps {
 
 export function BalanceCard({ balance, loading }: BalanceCardProps) {
   return (
-    <section className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-container p-8 text-on-primary-container shadow-xl">
+    <section
+      className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-container p-8 text-on-primary-container shadow-xl"
+      aria-label="Wallet balance"
+    >
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
 
       <div className="relative z-10 space-y-6">
@@ -15,13 +19,13 @@ export function BalanceCard({ balance, loading }: BalanceCardProps) {
           <span className="text-sm font-bold uppercase tracking-widest opacity-80">
             Demo Balance
           </span>
-          <span className="material-symbols-outlined">contactless</span>
+          <span className="material-symbols-outlined" aria-hidden="true">contactless</span>
         </div>
 
         <div className="space-y-1">
           <h2 className="text-4xl font-extrabold tracking-tight text-on-primary-container">
             {loading ? (
-              <span className="inline-block w-48 h-10 bg-white/20 rounded-lg animate-pulse" />
+              <Skeleton className="w-48 h-10 bg-white/20 rounded-lg" />
             ) : (
               formatCurrency(balance)
             )}

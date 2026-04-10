@@ -20,7 +20,7 @@ export function BottomNav() {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed bottom-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl shadow-whisper-up pb-safe-offset-2">
+    <nav aria-label="Main navigation" className="fixed bottom-0 w-full z-50 bg-slate-50/70 backdrop-blur-xl shadow-whisper-up pb-safe-offset-2">
       <div className="flex justify-around items-center h-16">
         {NAV_ITEMS.map((item) => {
           const isActive = location.pathname === item.path;
@@ -28,6 +28,8 @@ export function BottomNav() {
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
+              aria-label={item.label}
+              aria-current={isActive ? "page" : undefined}
               className="flex flex-col items-center gap-0.5 min-w-[64px] py-1 transition-colors"
             >
               <Icon

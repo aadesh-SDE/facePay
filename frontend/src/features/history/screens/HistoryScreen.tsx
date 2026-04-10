@@ -3,6 +3,7 @@ import { FilterChips } from "../components/FilterChips";
 import { DateGroupHeader } from "../components/DateGroupHeader";
 import { TransactionRow } from "../components/TransactionRow";
 import { PageShell } from "@/shared/components/layout/PageShell";
+import { SkeletonCircle, SkeletonText } from "@/shared/components/ui/Skeleton";
 
 export function HistoryScreen() {
   const {
@@ -29,6 +30,7 @@ export function HistoryScreen() {
             <input
               className="w-full pl-10 pr-4 py-3 bg-transparent border-none focus:ring-0 text-on-surface text-sm placeholder:text-outline"
               placeholder="Search transactions"
+              aria-label="Search transactions"
               value={searchQuery}
               onChange={(e) => updateSearch(e.target.value)}
             />
@@ -41,14 +43,14 @@ export function HistoryScreen() {
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="bg-surface-container-lowest rounded-xl p-4 flex items-center gap-4 animate-pulse"
+                className="bg-surface-container-lowest rounded-xl p-4 flex items-center gap-4"
               >
-                <div className="w-12 h-12 rounded-full bg-surface-container-high" />
+                <SkeletonCircle className="w-12 h-12" />
                 <div className="flex-1 space-y-2">
-                  <div className="w-32 h-4 bg-surface-container-high rounded" />
-                  <div className="w-20 h-3 bg-surface-container-high rounded" />
+                  <SkeletonText className="w-32" />
+                  <SkeletonText className="w-20 h-3" />
                 </div>
-                <div className="w-16 h-4 bg-surface-container-high rounded" />
+                <SkeletonText className="w-16" />
               </div>
             ))}
           </div>

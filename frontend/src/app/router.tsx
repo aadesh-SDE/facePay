@@ -6,6 +6,7 @@ import {
 import { useSelector } from "react-redux";
 import type { RootState } from "./store";
 import type { ReactNode } from "react";
+import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
 
 import { LoginPage } from "@/pages/login/LoginPage";
 import { SignupPage } from "@/pages/signup/SignupPage";
@@ -38,117 +39,134 @@ function GuestGuard({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
+function Guarded({
+  children,
+  guest,
+  feature,
+}: {
+  children: ReactNode;
+  guest?: boolean;
+  feature: string;
+}) {
+  const Guard = guest ? GuestGuard : AuthGuard;
+  return (
+    <ErrorBoundary featureName={feature}>
+      <Guard>{children}</Guard>
+    </ErrorBoundary>
+  );
+}
+
 const routes: RouteObject[] = [
   {
     path: "/login",
     element: (
-      <GuestGuard>
+      <Guarded guest feature="Auth">
         <LoginPage />
-      </GuestGuard>
+      </Guarded>
     ),
   },
   {
     path: "/signup",
     element: (
-      <GuestGuard>
+      <Guarded guest feature="Auth">
         <SignupPage />
-      </GuestGuard>
+      </Guarded>
     ),
   },
   {
     path: "/",
     element: (
-      <AuthGuard>
+      <Guarded feature="Home">
         <HomePage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/register-face",
     element: (
-      <AuthGuard>
+      <Guarded feature="Face Auth">
         <RegisterFacePage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/send",
     element: (
-      <AuthGuard>
+      <Guarded feature="Send Money">
         <SelectRecipientPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/send/amount",
     element: (
-      <AuthGuard>
+      <Guarded feature="Send Money">
         <EnterAmountPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/send/review",
     element: (
-      <AuthGuard>
+      <Guarded feature="Send Money">
         <ReviewPaymentPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/send/success",
     element: (
-      <AuthGuard>
+      <Guarded feature="Send Money">
         <SuccessReceiptPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/send/verify",
     element: (
-      <AuthGuard>
+      <Guarded feature="Face Verification">
         <FaceVerificationPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/send/verify/failed",
     element: (
-      <AuthGuard>
+      <Guarded feature="Face Verification">
         <VerificationFailedPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/history",
     element: (
-      <AuthGuard>
+      <Guarded feature="Transaction History">
         <HistoryPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/receive",
     element: (
-      <AuthGuard>
+      <Guarded feature="Receive Money">
         <MyQRCodePage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/receive/scan",
     element: (
-      <AuthGuard>
+      <Guarded feature="QR Scanner">
         <ScanQRPage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {
     path: "/profile",
     element: (
-      <AuthGuard>
+      <Guarded feature="Profile">
         <ProfilePage />
-      </AuthGuard>
+      </Guarded>
     ),
   },
   {

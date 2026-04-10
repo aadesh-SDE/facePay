@@ -5,6 +5,7 @@ import { searchRecipients } from "../api/sendApi";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { Avatar } from "@/shared/components/ui/Avatar";
 import { PageShell } from "@/shared/components/layout/PageShell";
+import { SkeletonCircle, SkeletonText } from "@/shared/components/ui/Skeleton";
 import type { Recipient } from "../types/send.types";
 
 function maskMobile(mobile: string): string {
@@ -66,6 +67,7 @@ export function SelectRecipientScreen() {
           <input
             className="w-full pl-12 pr-4 py-4 bg-surface-container-highest rounded-xl border-none focus:ring-2 focus:ring-primary/40 text-on-surface placeholder:text-outline transition-all text-sm"
             placeholder="Search by name or mobile"
+            aria-label="Search by name or mobile"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -74,11 +76,11 @@ export function SelectRecipientScreen() {
         {loading ? (
           <div className="space-y-3">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center gap-4 p-3 animate-pulse">
-                <div className="w-12 h-12 rounded-full bg-surface-container-high" />
+              <div key={i} className="flex items-center gap-4 p-3">
+                <SkeletonCircle className="w-12 h-12" />
                 <div className="space-y-2 flex-1">
-                  <div className="w-32 h-4 bg-surface-container-high rounded" />
-                  <div className="w-20 h-3 bg-surface-container-high rounded" />
+                  <SkeletonText className="w-32" />
+                  <SkeletonText className="w-20 h-3" />
                 </div>
               </div>
             ))}

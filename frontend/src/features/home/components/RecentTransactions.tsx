@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "@/shared/utils/formatCurrency";
+import { SkeletonCircle, SkeletonText } from "@/shared/components/ui/Skeleton";
 import type { RecentTransaction } from "../types/home.types";
 
 interface RecentTransactionsProps {
@@ -24,15 +25,15 @@ const directionStyles = {
 
 function SkeletonRow() {
   return (
-    <div className="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between animate-pulse">
+    <div className="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-surface-container-high" />
+        <SkeletonCircle className="w-12 h-12" />
         <div className="space-y-2">
-          <div className="w-28 h-4 bg-surface-container-high rounded" />
-          <div className="w-20 h-3 bg-surface-container-high rounded" />
+          <SkeletonText className="w-28" />
+          <SkeletonText className="w-20 h-3" />
         </div>
       </div>
-      <div className="w-20 h-5 bg-surface-container-high rounded" />
+      <SkeletonText className="w-20 h-5" />
     </div>
   );
 }

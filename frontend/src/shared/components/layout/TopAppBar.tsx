@@ -20,9 +20,10 @@ export function TopAppBar({
           {showBack ? (
             <button
               onClick={() => navigate(-1)}
+              aria-label="Go back"
               className="hover:bg-slate-200/50 transition-colors p-2 rounded-full"
             >
-              <span className="material-symbols-outlined text-teal-900">
+              <span className="material-symbols-outlined text-teal-900" aria-hidden="true">
                 arrow_back
               </span>
             </button>
