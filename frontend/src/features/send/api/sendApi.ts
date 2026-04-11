@@ -33,7 +33,10 @@ export async function submitTransfer(
   recipientId: string,
   amount: number,
   note?: string,
+  /** Sent as `Idempotency-Key` when using real HTTP; mock ignores. */
+  _idempotencyKey?: string,
 ): Promise<TransferResponse> {
+  void _idempotencyKey;
   await delay(MOCK_DELAY);
 
   const balanceKey = "fp_wallet_balance";

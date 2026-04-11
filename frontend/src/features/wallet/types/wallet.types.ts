@@ -4,20 +4,6 @@ export interface WalletState {
   error: string | null;
 }
 
-export interface TransferRequest {
-  recipientId: string;
-  amount: number;
-  note?: string;
-}
-
-export interface TransferResult {
-  transactionId: string;
-  amount: number;
-  recipientId: string;
-  timestamp: string;
-  newBalance: number;
-}
-
 export interface AddFundsRequest {
   amount: number;
 }

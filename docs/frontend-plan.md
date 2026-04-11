@@ -106,7 +106,7 @@ frontend/
 
       wallet/
         types/
-          wallet.types.ts     # WalletState, TransferRequest, TransferResult
+          wallet.types.ts     # WalletState, AddFundsRequest / AddFundsResult
         api/
           walletApi.ts        # fetchBalance(), addFunds() — mock now
         state/
@@ -575,7 +575,7 @@ flowchart LR
 
 ## Notes
 
-- All API calls will initially use **mock data/local state**; real backend integration comes in backend plan
+- All API calls will initially use **mock data/local state**; real backend integration is outlined in [`backend-plan.md`](./backend-plan.md)
 - Face descriptors stored in Redux (and later persisted to backend)
 - Demo balance starts at 10,000 for every new user
 - Currency format: INR with rupee symbol

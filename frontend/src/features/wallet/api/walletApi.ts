@@ -1,9 +1,4 @@
-import type {
-  AddFundsRequest,
-  AddFundsResult,
-  TransferRequest,
-  TransferResult,
-} from "../types/wallet.types";
+import type { AddFundsRequest, AddFundsResult } from "../types/wallet.types";
 
 const MOCK_DELAY = 600;
 const STORAGE_KEY = "fp_wallet_balance";
@@ -35,27 +30,5 @@ export async function addFunds(req: AddFundsRequest): Promise<AddFundsResult> {
   return {
     newBalance,
     timestamp: new Date().toISOString(),
-  };
-}
-
-export async function submitTransfer(
-  req: TransferRequest,
-): Promise<TransferResult> {
-  await delay(MOCK_DELAY);
-  const current = getStoredBalance();
-
-  if (req.amount > current) {
-    throw new Error("Insufficient balance");
-  }
-
-  const newBalance = current - req.amount;
-  setStoredBalance(newBalance);
-
-  return {
-    transactionId: `txn_${Date.now()}`,
-    amount: req.amount,
-    recipientId: req.recipientId,
-    timestamp: new Date().toISOString(),
-    newBalance,
   };
 }

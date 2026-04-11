@@ -35,7 +35,10 @@ export const signupThunk = createAsyncThunk<AuthResponse, SignupRequest>(
 export const logoutThunk = createAsyncThunk(
   "auth/logout",
   async () => {
-    await logoutApi();
-    localStorage.removeItem("fp_token");
+    try {
+      await logoutApi();
+    } finally {
+      localStorage.removeItem("fp_token");
+    }
   },
 );

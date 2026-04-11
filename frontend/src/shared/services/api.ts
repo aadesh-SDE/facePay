@@ -1,4 +1,6 @@
 import axios from "axios";
+import { store, persistor } from "@/app/store";
+import { clearSession } from "@/features/auth/state/authSlice";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "/api",
@@ -19,7 +21,10 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("fp_token");
-      window.location.href = "/login";
+      store.dispatch(clearSession());
+      void persistor.flush().finally(() => {
+        window.location.href = "/login";
+      });
     }
     return Promise.reject(error);
   },

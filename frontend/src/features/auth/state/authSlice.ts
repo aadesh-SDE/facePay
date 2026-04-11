@@ -17,6 +17,14 @@ const authSlice = createSlice({
     clearAuthError(state) {
       state.error = null;
     },
+    /** Clears session locally (e.g. 401); does not call logout API. */
+    clearSession(state) {
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
+      state.loading = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -55,9 +63,15 @@ const authSlice = createSlice({
         state.token = null;
         state.isAuthenticated = false;
         state.error = null;
+      })
+      .addCase(logoutThunk.rejected, (state) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+        state.error = null;
       });
   },
 });
 
-export const { clearAuthError } = authSlice.actions;
+export const { clearAuthError, clearSession } = authSlice.actions;
 export default authSlice.reducer;

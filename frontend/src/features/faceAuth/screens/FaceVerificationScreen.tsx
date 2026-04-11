@@ -37,15 +37,21 @@ export function FaceVerificationScreen() {
       if (success) {
         updateStatus("success");
         if (send.recipient && send.amount > 0) {
-          await dispatch(
-            submitTransferThunk({
-              recipientId: send.recipient.id,
-              amount: send.amount,
-              note: send.note || undefined,
-            }),
-          );
+          try {
+            await dispatch(
+              submitTransferThunk({
+                recipientId: send.recipient.id,
+                amount: send.amount,
+                note: send.note || undefined,
+              }),
+            ).unwrap();
+            setTimeout(() => navigate("/send/success"), 1200);
+          } catch {
+            setTimeout(() => navigate("/send/review"), 1200);
+          }
+        } else {
+          setTimeout(() => navigate("/send"), 800);
         }
-        setTimeout(() => navigate("/send/success"), 1200);
       } else {
         addAttempt();
         navigate("/send/verify/failed");

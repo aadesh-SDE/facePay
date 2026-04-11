@@ -6,10 +6,14 @@ export function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+/** Maximum single transfer in INR (rupees); must match backend and keypad caps. */
+export const MAX_TRANSFER_RUPEES = 100_000;
+
 export function isValidAmount(amount: number, balance: number): string | null {
   if (amount <= 0) return "Amount must be greater than zero";
   if (amount > balance) return "Insufficient balance";
-  if (amount > 100_000) return "Maximum transfer limit is ₹1,00,000";
+  if (amount > MAX_TRANSFER_RUPEES)
+    return "Maximum transfer limit is ₹1,00,000";
   return null;
 }
 

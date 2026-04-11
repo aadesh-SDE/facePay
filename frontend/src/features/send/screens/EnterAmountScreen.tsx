@@ -4,7 +4,7 @@ import { useSendViewModel } from "../viewModel/useSendViewModel";
 import { RecipientCard } from "../components/RecipientCard";
 import { AmountDisplay } from "../components/AmountDisplay";
 import { NumericKeypad } from "../components/NumericKeypad";
-import { isValidAmount } from "@/shared/utils/validators";
+import { isValidAmount, MAX_TRANSFER_RUPEES } from "@/shared/utils/validators";
 
 export function EnterAmountScreen() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export function EnterAmountScreen() {
       const next = prev + key;
       const parts = next.split(".");
       if (parts[1] && parts[1].length > 2) return prev;
-      if (parseFloat(next) > 999_999) return prev;
+      if (parseFloat(next) > MAX_TRANSFER_RUPEES) return prev;
       return next;
     });
   }, []);
