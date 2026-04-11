@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: facepay
+      POSTGRES_PASSWORD: facepay
+      POSTGRES_DB: facepay
+    ports:
+      - "5432:5432"
+    volumes:
+      - facepay_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U facepay -d facepay"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    ports:
+      - "4000:3000"
+    environment:
+      PORT: "3000"
+      DATABASE_URL: postgresql://facepay:facepay@postgres:5432/facepay?schema=public
+      JWT_SECRET: ${JWT_SECRET:-dev-jwt-secret-change-me-16chars}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      FACE_TEMPLATE_ENCRYPTION_KEY: ${FACE_TEMPLATE_ENCRYPTION_KEY:-dev-face-key-32chars-minimum!!}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:4173}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  facepay_pg:
