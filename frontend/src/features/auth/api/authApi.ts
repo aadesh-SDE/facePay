@@ -1,69 +1,30 @@
+import api from "@/shared/services/api";
 import type {
   LoginRequest,
   SignupRequest,
   AuthResponse,
 } from "../types/auth.types";
 
-const MOCK_DELAY = 800;
-
-const mockUsers = [
-  {
-    id: "usr_001",
-    name: "Adesh M",
-    mobile: "9876543210",
-    email: "adesh@facepay.demo",
-    password: "demo123",
-  },
-];
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+const BASE = "/api/v1/auth";
 
 export async function loginApi(req: LoginRequest): Promise<AuthResponse> {
-  await delay(MOCK_DELAY);
-
-  const user = mockUsers.find(
-    (u) => u.mobile === req.mobile.replace(/\s/g, "") && u.password === req.password,
-  );
-
-  if (!user) {
-    throw new Error("Invalid mobile number or password");
-  }
-
-  const { password: _, ...safeUser } = user;
-  return {
-    user: safeUser,
-    token: `mock_token_${Date.now()}`,
-  };
+  const { data } = await api.post<AuthResponse>(`${BASE}/login`, {
+    mobile: req.mobile.replace(/\s/g, ""),
+    password: req.password,
+  });
+  return data;
 }
 
 export async function signupApi(req: SignupRequest): Promise<AuthResponse> {
-  await delay(MOCK_DELAY);
-
-  const exists = mockUsers.find(
-    (u) => u.mobile === req.mobile.replace(/\s/g, ""),
-  );
-  if (exists) {
-    throw new Error("Mobile number already registered");
-  }
-
-  const newUser = {
-    id: `usr_${Date.now()}`,
+  const { data } = await api.post<AuthResponse>(`${BASE}/signup`, {
     name: req.name,
     mobile: req.mobile.replace(/\s/g, ""),
-    email: req.email,
+    email: req.email.trim(),
     password: req.password,
-  };
-  mockUsers.push(newUser);
-
-  const { password: _, ...safeUser } = newUser;
-  return {
-    user: safeUser,
-    token: `mock_token_${Date.now()}`,
-  };
+  });
+  return data;
 }
 
 export async function logoutApi(): Promise<void> {
-  await delay(300);
+  await api.post(`${BASE}/logout`, {});
 }

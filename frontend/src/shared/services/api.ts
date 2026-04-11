@@ -3,8 +3,10 @@ import { store, persistor } from "@/app/store";
 import { clearSession } from "@/features/auth/state/authSlice";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
-  timeout: 10_000,
+  baseURL:
+    import.meta.env.VITE_API_URL ||
+    (typeof window !== "undefined" ? "http://localhost:3000" : "/api"),
+  timeout: 15_000,
   headers: { "Content-Type": "application/json" },
 });
 

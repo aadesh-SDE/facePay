@@ -1,29 +1,26 @@
+import api from "@/shared/services/api";
 import type { QRData } from "../types/receive.types";
+import { getRecipientById } from "@/features/send/api/sendApi";
 
-const MOCK_DELAY = 400;
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export async function generatePaymentQR(
-  userId: string,
-  name: string,
-  mobile: string,
-): Promise<QRData> {
-  await delay(MOCK_DELAY);
-  return { userId, name, mobile };
+export async function generatePaymentQR(): Promise<QRData> {
+  const { data } = await api.get<QRData>("/api/v1/me/receive-qr");
+  return data;
 }
 
 export async function resolveQR(data: string): Promise<QRData> {
-  await delay(MOCK_DELAY);
+  let parsed: QRData;
   try {
-    const parsed = JSON.parse(data) as QRData;
-    if (!parsed.userId || !parsed.name || !parsed.mobile) {
-      throw new Error("Invalid QR data");
-    }
-    return parsed;
+    parsed = JSON.parse(data) as QRData;
   } catch {
     throw new Error("Could not read QR code. Please try again.");
   }
+  if (!parsed?.userId) {
+    throw new Error("Invalid QR data");
+  }
+  const verified = await getRecipientById(parsed.userId);
+  return {
+    userId: verified.id,
+    name: verified.name,
+    mobile: verified.mobile,
+  };
 }

@@ -7,6 +7,9 @@ import type { VerifyStatus } from "../types/face.types";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@/app/store";
 import { submitTransferThunk } from "@/features/send/state/sendThunks";
+import { fetchBalanceThunk } from "@/features/wallet/state/walletThunks";
+import { fetchDashboardThunk } from "@/features/home/state/homeThunks";
+import { fetchTransactionsThunk } from "@/features/history/state/historyThunks";
 
 export function FaceVerificationScreen() {
   const navigate = useNavigate();
@@ -45,6 +48,9 @@ export function FaceVerificationScreen() {
                 note: send.note || undefined,
               }),
             ).unwrap();
+            void dispatch(fetchBalanceThunk());
+            void dispatch(fetchDashboardThunk());
+            void dispatch(fetchTransactionsThunk());
             setTimeout(() => navigate("/send/success"), 1200);
           } catch {
             setTimeout(() => navigate("/send/review"), 1200);

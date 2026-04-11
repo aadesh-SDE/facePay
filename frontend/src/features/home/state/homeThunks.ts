@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { DashboardData } from "../types/home.types";
 import { fetchDashboardData } from "../api/homeApi";
+import { getApiErrorMessage } from "@/shared/lib/getApiErrorMessage";
 
 export const fetchDashboardThunk = createAsyncThunk<DashboardData, void>(
   "home/fetchDashboard",
@@ -9,7 +10,7 @@ export const fetchDashboardThunk = createAsyncThunk<DashboardData, void>(
       return await fetchDashboardData();
     } catch (err) {
       return rejectWithValue(
-        err instanceof Error ? err.message : "Failed to load dashboard",
+        getApiErrorMessage(err, "Failed to load dashboard"),
       );
     }
   },

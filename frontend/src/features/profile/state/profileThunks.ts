@@ -1,16 +1,43 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { SecurityHealth } from "../types/profile.types";
-import { fetchSecurityHealth } from "../api/profileApi";
+import type { SecurityHealth, ProfileData } from "../types/profile.types";
+import {
+  fetchSecurityHealth,
+  fetchMeProfile,
+  type MeResponse,
+} from "../api/profileApi";
+import { getApiErrorMessage } from "@/shared/lib/getApiErrorMessage";
 
-export const fetchSecurityHealthThunk = createAsyncThunk<
-  SecurityHealth,
+function mapMeToProfile(me: MeResponse): ProfileData {
+  return {
+    name: me.name,
+    mobile: me.mobile,
+    email: me.email,
+    faceRegistered: me.faceRegistered,
+    joinedDate: new Date(me.joinedAt).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }),
+    ...(me.avatar ? { avatar: me.avatar } : {}),
+  };
+}
+
+export const loadProfileThunk = createAsyncThunk<
+  { securityHealth: SecurityHealth; profileData: ProfileData },
   void
->("profile/fetchSecurityHealth", async (_, { rejectWithValue }) => {
+>("profile/loadProfile", async (_, { rejectWithValue }) => {
   try {
-    return await fetchSecurityHealth();
+    const [securityHealth, me] = await Promise.all([
+      fetchSecurityHealth(),
+      fetchMeProfile(),
+    ]);
+    return {
+      securityHealth,
+      profileData: mapMeToProfile(me),
+    };
   } catch (err) {
     return rejectWithValue(
-      err instanceof Error ? err.message : "Failed to load profile",
+      getApiErrorMessage(err, "Failed to load profile"),
     );
   }
 });

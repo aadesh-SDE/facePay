@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { LoginRequest, SignupRequest, AuthResponse } from "../types/auth.types";
 import { loginApi, signupApi, logoutApi } from "../api/authApi";
+import { getApiErrorMessage } from "@/shared/lib/getApiErrorMessage";
 
 export const loginThunk = createAsyncThunk<AuthResponse, LoginRequest>(
   "auth/login",
@@ -10,9 +11,7 @@ export const loginThunk = createAsyncThunk<AuthResponse, LoginRequest>(
       localStorage.setItem("fp_token", response.token);
       return response;
     } catch (err) {
-      return rejectWithValue(
-        err instanceof Error ? err.message : "Login failed",
-      );
+      return rejectWithValue(getApiErrorMessage(err, "Login failed"));
     }
   },
 );
@@ -25,9 +24,7 @@ export const signupThunk = createAsyncThunk<AuthResponse, SignupRequest>(
       localStorage.setItem("fp_token", response.token);
       return response;
     } catch (err) {
-      return rejectWithValue(
-        err instanceof Error ? err.message : "Signup failed",
-      );
+      return rejectWithValue(getApiErrorMessage(err, "Signup failed"));
     }
   },
 );

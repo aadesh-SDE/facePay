@@ -1,18 +1,22 @@
+import api from "@/shared/services/api";
 import type { SecurityHealth } from "../types/profile.types";
 
-const MOCK_DELAY = 400;
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+export type MeResponse = {
+  id: string;
+  name: string;
+  mobile: string;
+  email: string;
+  joinedAt: string;
+  faceRegistered: boolean;
+  avatar?: string;
+};
 
 export async function fetchSecurityHealth(): Promise<SecurityHealth> {
-  await delay(MOCK_DELAY);
-  const faceRegistered = !!localStorage.getItem("fp_face_descriptor");
-  return {
-    score: faceRegistered ? 85 : 40,
-    faceRegistered,
-    emailVerified: true,
-    pinEnabled: false,
-  };
+  const { data } = await api.get<SecurityHealth>("/api/v1/me/security-summary");
+  return data;
+}
+
+export async function fetchMeProfile(): Promise<MeResponse> {
+  const { data } = await api.get<MeResponse>("/api/v1/me");
+  return data;
 }

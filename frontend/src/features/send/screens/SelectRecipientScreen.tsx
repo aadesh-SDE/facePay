@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "@/app/store";
 import { useSendViewModel } from "../viewModel/useSendViewModel";
-import { searchRecipients } from "../api/sendApi";
+import { searchRecipientsThunk } from "../state/sendThunks";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { Avatar } from "@/shared/components/ui/Avatar";
 import { PageShell } from "@/shared/components/layout/PageShell";
@@ -25,10 +27,12 @@ function groupByLetter(recipients: Recipient[]): Record<string, Recipient[]> {
 
 export function SelectRecipientScreen() {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { selectRecipient, reset } = useSendViewModel();
+  const { searchLoading, searchResults, searchError } = useSelector(
+    (s: RootState) => s.send,
+  );
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Recipient[]>([]);
-  const [loading, setLoading] = useState(true);
   const debouncedQuery = useDebounce(query, 300);
 
   useEffect(() => {
@@ -36,22 +40,16 @@ export function SelectRecipientScreen() {
   }, [reset]);
 
   useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    searchRecipients(debouncedQuery).then((data) => {
-      if (!cancelled) {
-        setResults(data);
-        setLoading(false);
-      }
-    });
-    return () => { cancelled = true; };
-  }, [debouncedQuery]);
+    void dispatch(searchRecipientsThunk(debouncedQuery));
+  }, [debouncedQuery, dispatch]);
 
   function handleSelect(recipient: Recipient) {
     selectRecipient(recipient);
     navigate("/send/amount");
   }
 
+  const results = searchResults;
+  const loading = searchLoading;
   const recentRecipients = results.slice(0, 4);
   const grouped = groupByLetter(results);
   const sortedLetters = Object.keys(grouped).sort();
@@ -72,6 +70,12 @@ export function SelectRecipientScreen() {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
+
+        {searchError && (
+          <p className="text-sm text-error text-center" role="alert">
+            {searchError}
+          </p>
+        )}
 
         {loading ? (
           <div className="space-y-3">

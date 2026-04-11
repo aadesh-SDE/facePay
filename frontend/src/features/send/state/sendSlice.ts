@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { SendState, Recipient, SendStatus } from "../types/send.types";
-import { submitTransferThunk } from "./sendThunks";
+import { submitTransferThunk, searchRecipientsThunk } from "./sendThunks";
 
 const initialState: SendState = {
   recipient: null,
@@ -10,6 +10,9 @@ const initialState: SendState = {
   transactionId: null,
   loading: false,
   error: null,
+  searchLoading: false,
+  searchError: null,
+  searchResults: [],
 };
 
 const sendSlice = createSlice({
@@ -30,7 +33,7 @@ const sendSlice = createSlice({
       state.status = action.payload;
     },
     resetSend() {
-      return initialState;
+      return { ...initialState };
     },
     clearSendError(state) {
       state.error = null;
@@ -51,6 +54,19 @@ const sendSlice = createSlice({
         state.loading = false;
         state.status = "failed";
         state.error = action.payload as string;
+      })
+      .addCase(searchRecipientsThunk.pending, (state) => {
+        state.searchLoading = true;
+        state.searchError = null;
+      })
+      .addCase(searchRecipientsThunk.fulfilled, (state, action) => {
+        state.searchLoading = false;
+        state.searchResults = action.payload;
+      })
+      .addCase(searchRecipientsThunk.rejected, (state, action) => {
+        state.searchLoading = false;
+        state.searchError = action.payload as string;
+        state.searchResults = [];
       });
   },
 });

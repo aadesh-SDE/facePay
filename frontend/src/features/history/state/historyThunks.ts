@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { Transaction } from "../types/history.types";
 import { fetchTransactions } from "../api/historyApi";
+import { getApiErrorMessage } from "@/shared/lib/getApiErrorMessage";
 
 export const fetchTransactionsThunk = createAsyncThunk<Transaction[], void>(
   "history/fetchTransactions",
@@ -9,7 +10,7 @@ export const fetchTransactionsThunk = createAsyncThunk<Transaction[], void>(
       return await fetchTransactions();
     } catch (err) {
       return rejectWithValue(
-        err instanceof Error ? err.message : "Failed to load transactions",
+        getApiErrorMessage(err, "Failed to load transactions"),
       );
     }
   },

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { ProfileState } from "../types/profile.types";
-import { fetchSecurityHealthThunk } from "./profileThunks";
+import { loadProfileThunk } from "./profileThunks";
 
 const initialState: ProfileState = {
   securityHealth: {
@@ -9,6 +9,7 @@ const initialState: ProfileState = {
     emailVerified: false,
     pinEnabled: false,
   },
+  profileData: null,
   loading: false,
   error: null,
 };
@@ -23,15 +24,16 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchSecurityHealthThunk.pending, (state) => {
+      .addCase(loadProfileThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchSecurityHealthThunk.fulfilled, (state, action) => {
+      .addCase(loadProfileThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.securityHealth = action.payload;
+        state.securityHealth = action.payload.securityHealth;
+        state.profileData = action.payload.profileData;
       })
-      .addCase(fetchSecurityHealthThunk.rejected, (state, action) => {
+      .addCase(loadProfileThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

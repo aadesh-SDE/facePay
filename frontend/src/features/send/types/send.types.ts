@@ -35,6 +35,9 @@ export interface SendState {
   transactionId: string | null;
   loading: boolean;
   error: string | null;
+  searchLoading: boolean;
+  searchError: string | null;
+  searchResults: Recipient[];
 }
 
 export interface TransferResponse {

@@ -24,6 +24,7 @@ export interface SettingsItem {
 
 export interface ProfileState {
   securityHealth: SecurityHealth;
+  profileData: ProfileData | null;
   loading: boolean;
   error: string | null;
 }

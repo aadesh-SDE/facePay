@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { saveFaceDescriptor, getFaceDescriptor } from "../api/faceApi";
 import type { RootState } from "@/app/store";
+import { getApiErrorMessage } from "@/shared/lib/getApiErrorMessage";
 
 export const registerFaceThunk = createAsyncThunk<
   number[],
@@ -17,7 +18,7 @@ export const registerFaceThunk = createAsyncThunk<
     return descriptor;
   } catch (err) {
     return rejectWithValue(
-      err instanceof Error ? err.message : "Face registration failed",
+      getApiErrorMessage(err, "Face registration failed"),
     );
   }
 });
@@ -35,7 +36,7 @@ export const loadDescriptorThunk = createAsyncThunk<
     return response.descriptor;
   } catch (err) {
     return rejectWithValue(
-      err instanceof Error ? err.message : "Failed to load face data",
+      getApiErrorMessage(err, "Failed to load face data"),
     );
   }
 });

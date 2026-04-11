@@ -10,11 +10,20 @@ export function useReceiveViewModel() {
   const receive = useSelector((state: RootState) => state.receive);
 
   useEffect(() => {
-    if (user && !receive.qrData) {
-      generatePaymentQR(user.id, user.name, user.mobile).then((data) => {
+    if (!user || receive.qrData) return;
+    void generatePaymentQR()
+      .then((data) => {
         dispatch(setQRData(data));
+      })
+      .catch(() => {
+        dispatch(
+          setQRData({
+            userId: user.id,
+            name: user.name,
+            mobile: user.mobile,
+          }),
+        );
       });
-    }
   }, [user, receive.qrData, dispatch]);
 
   const handleScan = useCallback(
