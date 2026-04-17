@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /**
  * Deletes every user and all related rows (wallets, transfers, transactions, etc.).
  * Requires CONFIRM_WIPE=yes so it is not run by accident.
