@@ -1,3 +1,9 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://facepay-inrz.onrender.com",
+      "VITE_PUBLIC_URL": "https://facepay-bice.vercel.app"
+    }
+  }
 }
