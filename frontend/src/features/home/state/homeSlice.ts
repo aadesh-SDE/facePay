@@ -15,6 +15,11 @@ const homeSlice = createSlice({
     clearHomeError(state) {
       state.error = null;
     },
+    resetHomeData(state) {
+      state.recentTransactions = [];
+      state.loading = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -33,5 +38,5 @@ const homeSlice = createSlice({
   },
 });
 
-export const { clearHomeError } = homeSlice.actions;
+export const { clearHomeError, resetHomeData } = homeSlice.actions;
 export default homeSlice.reducer;

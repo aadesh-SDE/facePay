@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "@/app/store";
 import { loadProfileThunk } from "../state/profileThunks";
 import { logoutThunk } from "@/features/auth/state/authThunks";
-import { resetAllFaceState } from "@/features/faceAuth/state/faceSlice";
+import { resetSessionClientState } from "@/app/sessionCleanup";
 
 export function useProfileViewModel() {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +18,7 @@ export function useProfileViewModel() {
 
   const logout = useCallback(async () => {
     await dispatch(logoutThunk());
-    dispatch(resetAllFaceState());
+    resetSessionClientState(dispatch);
   }, [dispatch]);
 
   return {

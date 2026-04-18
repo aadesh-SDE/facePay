@@ -20,6 +20,13 @@ const historySlice = createSlice({
     setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
     },
+    resetHistoryData(state) {
+      state.transactions = [];
+      state.filter = "all";
+      state.searchQuery = "";
+      state.loading = false;
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,5 +45,6 @@ const historySlice = createSlice({
   },
 });
 
-export const { setFilter, setSearchQuery } = historySlice.actions;
+export const { setFilter, setSearchQuery, resetHistoryData } =
+  historySlice.actions;
 export default historySlice.reducer;

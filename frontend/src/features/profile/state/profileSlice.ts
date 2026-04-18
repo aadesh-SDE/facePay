@@ -21,6 +21,9 @@ const profileSlice = createSlice({
     clearProfileError(state) {
       state.error = null;
     },
+    resetProfileData() {
+      return { ...initialState };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -40,5 +43,5 @@ const profileSlice = createSlice({
   },
 });
 
-export const { clearProfileError } = profileSlice.actions;
+export const { clearProfileError, resetProfileData } = profileSlice.actions;
 export default profileSlice.reducer;

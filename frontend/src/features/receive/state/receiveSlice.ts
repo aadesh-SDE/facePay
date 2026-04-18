@@ -24,9 +24,17 @@ const receiveSlice = createSlice({
     clearReceiveError(state) {
       state.error = null;
     },
+    resetReceiveData() {
+      return { ...initialState };
+    },
   },
 });
 
-export const { setQRData, setScanResult, clearScanResult, clearReceiveError } =
-  receiveSlice.actions;
+export const {
+  setQRData,
+  setScanResult,
+  clearScanResult,
+  clearReceiveError,
+  resetReceiveData,
+} = receiveSlice.actions;
 export default receiveSlice.reducer;
