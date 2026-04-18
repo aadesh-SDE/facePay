@@ -1,6 +1,6 @@
 /// <reference types="node" />
 /** Print row counts for all app tables (read-only). Uses DATABASE_URL from .env. */
-import "dotenv/config";
+import "./loadEnv.js";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

@@ -1,4 +1,6 @@
-import "dotenv/config";
+import { loadBackendEnv } from "./shared/lib/loadBackendEnv.js";
+
+loadBackendEnv();
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";

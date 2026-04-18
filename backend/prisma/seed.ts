@@ -1,7 +1,7 @@
 /**
  * Dev-only seed. Default login: mobile 9876543210, password demo123
  */
-import "dotenv/config";
+import "./loadEnv.js";
 import { PrismaClient } from "@prisma/client";
 import argon2 from "argon2";
 

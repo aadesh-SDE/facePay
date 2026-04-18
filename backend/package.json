@@ -14,6 +14,7 @@
     "db:seed": "prisma db seed",
     "db:wipe-users": "tsx prisma/wipe-all-users.ts",
     "db:counts": "tsx prisma/show-counts.ts",
+    "db:studio": "prisma studio",
     "postinstall": "prisma generate"
   },
   "prisma": {

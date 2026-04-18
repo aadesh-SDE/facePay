@@ -1,5 +1,8 @@
+# API loads backend/.env (set DATABASE_URL to Neon). Optional local Postgres: docker compose --profile local-db up
 services:
   postgres:
+    profiles:
+      - local-db
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: facepay
@@ -19,16 +22,8 @@ services:
     build: .
     ports:
       - "4000:3000"
-    environment:
-      PORT: "3000"
-      DATABASE_URL: postgresql://facepay:facepay@postgres:5432/facepay?schema=public
-      JWT_SECRET: ${JWT_SECRET:-dev-jwt-secret-change-me-16chars}
-      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
-      FACE_TEMPLATE_ENCRYPTION_KEY: ${FACE_TEMPLATE_ENCRYPTION_KEY:-dev-face-key-32chars-minimum!!}
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:4173}
-    depends_on:
-      postgres:
-        condition: service_healthy
+    env_file:
+      - .env
 
 volumes:
   facepay_pg:

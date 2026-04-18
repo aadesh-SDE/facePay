@@ -6,9 +6,9 @@
  * Usage (from backend/):
  *   CONFIRM_WIPE=yes npx tsx prisma/wipe-all-users.ts
  *
- * Uses DATABASE_URL from .env (local, Neon, or copy from Render for one-off wipe).
+ * Uses DATABASE_URL from backend/.env (Neon, Render, or local via env_file).
  */
-import "dotenv/config";
+import "./loadEnv.js";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
