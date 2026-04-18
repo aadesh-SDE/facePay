@@ -192,7 +192,7 @@ export function FaceScanner({
         const ear = calculateEAR(result.landmarks);
         blinkTrackerRef.current = updateBlinkTracker(
           blinkTrackerRef.current,
-          ear.average,
+          ear.min,
         );
         const currentBlinks = blinkTrackerRef.current.blinkCount;
         updateBlinks(currentBlinks);
@@ -207,8 +207,9 @@ export function FaceScanner({
         }
       }
 
+      const pollMs = matched ? 50 : 100;
       animFrameRef.current = requestAnimationFrame(() => {
-        setTimeout(detectLoop, 100);
+        setTimeout(detectLoop, pollMs);
       });
     }
 

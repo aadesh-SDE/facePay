@@ -91,6 +91,7 @@ export function calculateEAR(landmarks: faceapi.FaceLandmarks68): {
   left: number;
   right: number;
   average: number;
+  min: number;
 } {
   const positions = landmarks.positions;
   const leftEye = positions.slice(36, 42);
@@ -103,11 +104,15 @@ export function calculateEAR(landmarks: faceapi.FaceLandmarks68): {
     left: leftEAR,
     right: rightEAR,
     average: (leftEAR + rightEAR) / 2.0,
+    /** Stricter of the two eyes — better blink sensitivity than averaging. */
+    min: Math.min(leftEAR, rightEAR),
   };
 }
 
-const EAR_THRESHOLD = 0.2;
-const EAR_CONSEC_FRAMES = 2;
+/** Frames with EAR below this count as “eye closed” (raised vs 0.2 so blinks register more easily). */
+const EAR_THRESHOLD = 0.26;
+/** Only one closed frame needed before reopening (was 2; slow inference missed fast blinks). */
+const EAR_CONSEC_FRAMES = 1;
 
 export interface BlinkTracker {
   blinkCount: number;
