@@ -20,4 +20,5 @@ COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=build /app/dist ./dist
 USER nodejs
 EXPOSE 3000
-CMD ["sh", "-c", "npx prisma migrate deploy && npx prisma db seed && node dist/server.js"]
+# Seed is manual only (`npm run db:seed` locally or one-off) — do not re-seed on every deploy.
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
