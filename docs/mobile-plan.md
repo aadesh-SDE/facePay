@@ -362,6 +362,18 @@ Map **`frontend/src/app/router.tsx`** paths to RN stacks and **`src/pages/*`** e
 - **Face:** **Front-camera capture** → JPEG **base64** → deterministic **128-D vector** (`deriveDescriptorFromCaptureBase64` — *embedding proxy*, not ML Kit / face-api parity) → existing **`PUT /api/v1/me/face-template`** flow. Next spikes: optional **vision-camera** if scan UX needs it; **real embeddings** (on-device or server) when backend/contracts extend.
 - **Secure auth:** Backend remains **stateless access JWT** (see `backend` auth service: refresh invalidation “later”). Mobile already uses **SecureStore** for the token, **401** clears session + feature state. Phase 4 follow-ups here are **product** decisions (refresh tokens, rotation) rather than mobile-only code until the API adds them.
 
+#### Decisions (locked) — industry-informed follow-ups
+
+These choices align with common **fintech / mobile** practice (on-device ML Kit–class stacks for barcode volume, vendor or server face pipelines for real biometric assurance, OAuth-style session hygiene) while matching **this repo’s** Expo + stateless-JWT reality.
+
+| Area | Decision | Revisit when |
+|------|----------|----------------|
+| **QR scanning** | **Keep `expo-camera`** for scan + My QR. It already delegates to **platform scanners** where the OS provides them (e.g. Android ML Kit–backed flows in supported configs). **Do not** add **vision-camera** or **commercial SDKs** (Scandit, Scanbot, etc.) until **dogfood metrics** justify the native/build complexity. | Internal testing shows **unacceptable scan failure** (e.g. consistent misses in normal lighting / target QR formats), or a pilot needs **enterprise-grade** scanning. |
+| **Face enrollment** | **Interim:** camera capture + **128-D proxy** (`deriveDescriptorFromCaptureBase64`) stays allowed only as a **spike**, not as liveness-safe biometrics. **Next engineering increment:** **quality + presence gate** (single frontal face, lighting/pose checks—typically **ML Kit face detection** or equivalent) before any template upload; **product-grade** path is **server-side embedding** or a **KYC vendor**—pick when fraud/compliance matters. **Do not** buy barcode SDKs for face; **do not** claim proxy = face match. | You add **backend** image/embedding endpoints or choose a **vendor**; or you need **regulator / partner** assurance. |
+| **Session / tokens** | **No mobile-only refresh** hacks. **Backend first:** opaque **refresh token**, **rotation**, **revoke on logout**, **short-lived access JWT**; then mobile uses **two SecureStore keys** (access + refresh) and refresh-on-401 or proactive expiry. Until the API ships, **SecureStore + 401 + `resetSessionClientState`** remains the documented **MVP** stance. | **`backend`** exposes refresh + rotation contract and env for token lifetimes. |
+
+**Tracker / GitHub:** copy-ready issue titles and acceptance criteria live in [`docs/mobile-phase4-tracker.md`](./mobile-phase4-tracker.md). Create three issues from that file when you triage in GitHub.
+
 ### Phase 5 — Funding hardening
 
 - Short **demo script** + screen recording fallback.  
