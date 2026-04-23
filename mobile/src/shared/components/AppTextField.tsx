@@ -10,7 +10,7 @@ type Props = {
   error?: string;
   secureTextEntry?: boolean;
   autoCapitalize?: "none" | "sentences" | "words" | "characters";
-  keyboardType?: "default" | "email-address";
+  keyboardType?: "default" | "email-address" | "phone-pad";
 };
 
 export function AppTextField({

@@ -1,86 +1,114 @@
-import { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  StyleSheet,
-  View,
-} from "react-native";
-import { useAppDispatch } from "@/app/hooks";
-import { logout } from "@/features/auth/state/authSlice";
-import { fetchHealth } from "@/features/home/api/homeApi";
+import { useCallback, useState } from "react";
+import { RefreshControl, StyleSheet, View } from "react-native";
+import { useHomeViewModel } from "@/features/home/viewModel/useHomeViewModel";
+import { useAuthViewModel } from "@/features/auth/viewModel/useAuthViewModel";
 import { AppButton } from "@/shared/components/AppButton";
 import { AppText } from "@/shared/components/AppText";
 import { Card } from "@/shared/components/Card";
 import { Screen } from "@/shared/components/Screen";
-import { getApiBaseUrl } from "@/shared/config/env";
+import { formatCurrency } from "@/shared/utils/formatCurrency";
 import { useTheme } from "@/shared/theme";
 
 export function HomeScreen() {
-  const dispatch = useAppDispatch();
-  const { spacing } = useTheme();
-  const [health, setHealth] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { user, balance, recentTransactions, loading, error, refresh } =
+    useHomeViewModel();
+  const { logout } = useAuthViewModel();
+  const { spacing, colors, radii } = useTheme();
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const data = await fetchHealth();
-        if (!cancelled) {
-          setHealth(JSON.stringify(data));
-          setError(null);
-        }
-      } catch (e: unknown) {
-        if (!cancelled) {
-          setError(e instanceof Error ? e.message : "Request failed");
-          setHealth(null);
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await refresh();
+    } finally {
+      setRefreshing(false);
+    }
+  }, [refresh]);
+
+  const firstName = user?.name?.split(" ")[0] ?? "there";
 
   return (
-    <Screen scroll>
-      <View style={[styles.stack, { marginTop: spacing.lg }]}>
-        <AppText variant="headline">Home</AppText>
-        <AppText variant="caption" color="onSurfaceVariant">
-          API: {getApiBaseUrl()}
+    <Screen
+      scroll
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} />
+      }
+      contentContainerStyle={{ paddingTop: spacing.lg }}
+    >
+      <View style={{ gap: spacing.base }}>
+        <AppText variant="headline">Hello, {firstName}</AppText>
+        <AppText variant="body" color="onSurfaceVariant">
+          Your wallet and recent activity.
         </AppText>
 
         <Card elevated>
           <AppText variant="label" color="onSurfaceVariant">
-            Smoke test
+            Demo balance
           </AppText>
-          {loading ? (
-            <ActivityIndicator style={styles.spinner} />
-          ) : error ? (
-            <AppText variant="body" color="error" style={styles.bodyGap}>
-              GET /health — {error}
+          {loading && !refreshing ? (
+            <AppText variant="title" style={{ marginTop: spacing.sm }}>
+              …
             </AppText>
           ) : (
-            <AppText variant="bodySmall" color="onSurface" style={styles.bodyGap}>
-              GET /health — {health}
+            <AppText variant="headline" color="primary" style={{ marginTop: spacing.xs }}>
+              {formatCurrency(balance)}
             </AppText>
           )}
+          {error ? (
+            <AppText variant="caption" color="error" style={{ marginTop: spacing.sm }}>
+              {error}
+            </AppText>
+          ) : null}
         </Card>
 
-        <AppButton
-          title="Log out"
-          onPress={() => dispatch(logout())}
-          variant="outline"
-        />
+        <AppText variant="title">Recent</AppText>
+        {recentTransactions.length === 0 && !loading ? (
+          <AppText variant="bodySmall" color="onSurfaceVariant">
+            No transactions yet.
+          </AppText>
+        ) : (
+          <View style={{ gap: spacing.sm }}>
+            {recentTransactions.map((t) => (
+              <View
+                key={t.id}
+                style={[
+                  styles.row,
+                  {
+                    borderColor: colors.outlineVariant,
+                    borderRadius: radii.md,
+                    padding: spacing.md,
+                    backgroundColor: colors.surfaceContainerLowest,
+                  },
+                ]}
+              >
+                <View style={{ flex: 1 }}>
+                  <AppText variant="label">{t.title}</AppText>
+                  <AppText variant="caption" color="onSurfaceVariant">
+                    {t.subtitle}
+                  </AppText>
+                </View>
+                <AppText
+                  variant="label"
+                  color={t.direction === "sent" ? "error" : "primary"}
+                >
+                  {t.direction === "sent" ? "-" : "+"}
+                  {formatCurrency(Math.abs(t.amount))}
+                </AppText>
+              </View>
+            ))}
+          </View>
+        )}
+
+        <AppButton title="Log out" onPress={() => void logout()} variant="outline" />
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  stack: { gap: 16 },
-  spinner: { marginVertical: 12 },
-  bodyGap: { marginTop: 8 },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+  },
 });

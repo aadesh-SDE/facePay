@@ -348,6 +348,8 @@ Map **`frontend/src/app/router.tsx`** paths to RN stacks and **`src/pages/*`** e
 6. Send (full stack)  
 7. Face registration + verification (after camera/QR spikes)
 
+**Status (steps 1–2):** Real **`/api/v1/auth/login`**, **`/signup`**, **`/logout`** with JWT in **Expo SecureStore** (not Redux); **`bootstrapSessionThunk`** restores session via **`GET /api/v1/me`** before navigation; axios attaches Bearer from SecureStore and clears session on **401**. **Home** loads **`GET /api/v1/me/wallet/balance`** + **`GET /api/v1/me/transactions?limit=5`** with pull-to-refresh. Redux **persist whitelist** is `home` + `wallet` only (auth is not persisted). See `mobile/src/features/auth/*`, `home/*`, `wallet/*`, `shared/lib/authTokenStorage.ts`, `shared/api/client.ts`.
+
 ### Phase 4 — Spikes (early)
 
 - **QR** scan + **my QR** generation on device.  

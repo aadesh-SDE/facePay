@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -16,6 +16,7 @@ type Props = {
   edges?: Edge[];
   contentContainerStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
+  refreshControl?: ComponentProps<typeof ScrollView>["refreshControl"];
 };
 
 export function Screen({
@@ -24,6 +25,7 @@ export function Screen({
   edges = ["top", "bottom"],
   contentContainerStyle,
   style,
+  refreshControl,
 }: Props) {
   const { colors, spacing } = useTheme();
 
@@ -35,6 +37,7 @@ export function Screen({
       >
         <ScrollView
           keyboardShouldPersistTaps="handled"
+          refreshControl={refreshControl}
           contentContainerStyle={[
             styles.scrollContent,
             { paddingHorizontal: spacing.base, paddingBottom: spacing.xl },

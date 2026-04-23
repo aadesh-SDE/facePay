@@ -11,15 +11,20 @@ import {
   persistStore,
 } from "redux-persist";
 import { authReducer } from "@/features/auth/state/authSlice";
+import { homeReducer } from "@/features/home/state/homeSlice";
+import { walletReducer } from "@/features/wallet/state/walletSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  home: homeReducer,
+  wallet: walletReducer,
 });
 
 const persistConfig = {
   key: "facepay-root",
   storage: AsyncStorage,
-  whitelist: ["auth"],
+  /** Auth token lives in SecureStore only; cache home/wallet for UX (optional). */
+  whitelist: ["home", "wallet"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
