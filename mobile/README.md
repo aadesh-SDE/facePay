@@ -4,7 +4,9 @@
 
 **Phase 2:** **Design tokens** in `src/shared/theme/` (colors / spacing / radii / shadows / typography aligned with `frontend/tailwind.config.ts`), **Manrope** via `@expo-google-fonts/manrope` + `expo-font`, **`ThemeProvider`**, primitives **`Screen`**, **`AppText`**, **`AppButton`**, **`AppTextField`**, **`Card`** — screens use these instead of ad hoc `StyleSheet` colors.
 
-**Phase 3 (complete):** Same auth/bootstrap as before, plus **bottom tabs** (**Home**, **History**, **Receive** → My QR + Scan, **Profile**), **Profile** (`/me`, `/me/security-summary`), **History** (full transaction list + filter/search), **Receive** (QR from API + scan), **Send** (search → amount → review → **biometric verify** → `POST /api/v1/transfers`), **Face template** (demo descriptor + `/me/face-template`). **401 / logout** clear feature state via **`src/app/sessionCleanup.ts`**. See **`docs/mobile-plan.md`** §9 Phase 3.
+**Phase 3 (complete):** Same auth/bootstrap as before, plus **bottom tabs** (**Home**, **History**, **Receive** → My QR + Scan, **Profile**), **Profile** (`/me`, `/me/security-summary`), **History** (full transaction list + filter/search), **Receive** (QR from API + scan), **Send** (search → amount → review → **biometric verify** → `POST /api/v1/transfers`), **Face template** (camera-derived vector + `/me/face-template`; Phase 4 refines this). **401 / logout** clear feature state via **`src/app/sessionCleanup.ts`**. See **`docs/mobile-plan.md`** §9 Phase 3.
+
+**Phase 4 (started):** **QR** scan UX (torch, haptics, cooldown, focus reset); **face registration** via **front-camera photo** → capture-derived **128-D proxy** → same face-template API; **iOS** privacy strings for camera + Face ID. See **`docs/mobile-plan.md`** §9 Phase 4.
 
 ## Prereqs
 

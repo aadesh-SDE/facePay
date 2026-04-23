@@ -348,13 +348,19 @@ Map **`frontend/src/app/router.tsx`** paths to RN stacks and **`src/pages/*`** e
 6. Send (full stack)  
 7. Face registration + verification (after camera/QR spikes)
 
-**Status (complete):** Steps **1–7** above are implemented in `mobile/`. **Auth** matches the prior summary (SecureStore JWT, bootstrap, 401 → `clearSession` + **`resetSessionClientState`** in `src/app/sessionCleanup.ts`). **Navigation:** authed users land on **`MainTabs`** (Home, History, Receive stack with My QR + Scan, Profile); **send** and **face** flows sit on the **root stack** above tabs (`SelectRecipient` → `EnterAmount` → `ReviewPayment` → **`FaceVerification`** with **`expo-local-authentication`**, then `SuccessReceipt` / `VerificationFailed`). **Receive:** `react-native-qrcode-svg` + **`GET /api/v1/me/receive-qr`**; scan uses **`expo-camera`** `CameraView` + **`resolveQR`**. **Face template:** demo 128-D descriptor + **`PUT /api/v1/me/face-template`** (same contract as web until on-device embeddings). **Wallet** slice listens for **`send/submitTransfer/fulfilled`** to refresh **`newBalance`**. Redux **persist whitelist** remains **`home`** + **`wallet`** only.
+**Status (complete):** Steps **1–7** above are implemented in `mobile/`. **Auth** matches the prior summary (SecureStore JWT, bootstrap, 401 → `clearSession` + **`resetSessionClientState`** in `src/app/sessionCleanup.ts`). **Navigation:** authed users land on **`MainTabs`** (Home, History, Receive stack with My QR + Scan, Profile); **send** and **face** flows sit on the **root stack** above tabs (`SelectRecipient` → `EnterAmount` → `ReviewPayment` → **`FaceVerification`** with **`expo-local-authentication`**, then `SuccessReceipt` / `VerificationFailed`). **Receive:** `react-native-qrcode-svg` + **`GET /api/v1/me/receive-qr`**; scan uses **`expo-camera`** `CameraView` + **`resolveQR`**. **Face template:** Phase 3 shipped a placeholder path; **Phase 4** replaces it with **camera capture → 128-D proxy** + **`PUT /api/v1/me/face-template`** (see Phase 4 status for ML follow-ups). **Wallet** slice listens for **`send/submitTransfer/fulfilled`** to refresh **`newBalance`**. Redux **persist whitelist** remains **`home`** + **`wallet`** only.
 
 ### Phase 4 — Spikes (early)
 
 - **QR** scan + **my QR** generation on device.  
 - **Face** capture path that satisfies backend contracts (may differ from web’s face-api implementation).  
 - **Secure auth** end-to-end.
+
+**Status (in progress):** Mobile now treats Phase 4 as an **iteration track** (not a second “big bang” release):
+
+- **QR:** `expo-camera` scan screen adds **torch toggle**, **haptic** success/error feedback (`expo-haptics`), **cooldown** after failed reads, and **focus reset** when returning to the screen. **iOS** `NSCameraUsageDescription` + **`NSFaceIDUsageDescription`** (and Android camera permission via `expo-camera` plugin copy) document camera + Face ID use.
+- **Face:** **Front-camera capture** → JPEG **base64** → deterministic **128-D vector** (`deriveDescriptorFromCaptureBase64` — *embedding proxy*, not ML Kit / face-api parity) → existing **`PUT /api/v1/me/face-template`** flow. Next spikes: optional **vision-camera** if scan UX needs it; **real embeddings** (on-device or server) when backend/contracts extend.
+- **Secure auth:** Backend remains **stateless access JWT** (see `backend` auth service: refresh invalidation “later”). Mobile already uses **SecureStore** for the token, **401** clears session + feature state. Phase 4 follow-ups here are **product** decisions (refresh tokens, rotation) rather than mobile-only code until the API adds them.
 
 ### Phase 5 — Funding hardening
 

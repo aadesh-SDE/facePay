@@ -13,7 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "FacePay uses the camera to scan payment QR codes and to capture a photo for your face template.",
+        "NSFaceIDUsageDescription": "FacePay uses Face ID to confirm transfers and protect access to your account."
+      }
     },
     "android": {
       "usesCleartextTraffic": true,
@@ -33,7 +37,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow FacePay to scan payment QR codes."
+          "cameraPermission": "Allow FacePay to use the camera for QR payments and face registration."
         }
       ]
     ]
