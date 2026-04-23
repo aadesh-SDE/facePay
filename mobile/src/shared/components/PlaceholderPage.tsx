@@ -1,4 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { AppText } from "@/shared/components/AppText";
+import { Screen } from "@/shared/components/Screen";
+import { useTheme } from "@/shared/theme";
 
 type Props = {
   title: string;
@@ -6,28 +9,20 @@ type Props = {
 
 /** Route shell placeholder until the feature MVVM stack is implemented. */
 export function PlaceholderPage({ title }: Props) {
+  const { spacing } = useTheme();
+
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.sub}>Screen not built yet (Phase 1 skeleton).</Text>
-    </View>
+    <Screen scroll>
+      <View style={[styles.stack, { marginTop: spacing["2xl"] }]}>
+        <AppText variant="title">{title}</AppText>
+        <AppText variant="body" color="onSurfaceVariant">
+          Screen not built yet — placeholder (Phase 2 layout).
+        </AppText>
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 24,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginBottom: 8,
-  },
-  sub: {
-    fontSize: 14,
-    color: "#64748b",
-  },
+  stack: { gap: 8 },
 });

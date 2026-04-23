@@ -1,6 +1,8 @@
 # FacePay mobile (Expo + React Native)
 
-Phase 1 skeleton: **MVVM-aligned** `src/` layout (`app/`, `pages/`, `features/`, `shared/`), **Redux + redux-persist**, **React Navigation** with guest vs authed stacks, **`GET /health`** smoke call via `axios`.
+**Phase 1:** MVVM-aligned `src/` layout, **Redux + redux-persist**, **React Navigation** (guest vs authed), **`GET /health`** via `axios`.
+
+**Phase 2:** **Design tokens** in `src/shared/theme/` (colors / spacing / radii / shadows / typography aligned with `frontend/tailwind.config.ts`), **Manrope** via `@expo-google-fonts/manrope` + `expo-font`, **`ThemeProvider`**, primitives **`Screen`**, **`AppText`**, **`AppButton`**, **`AppTextField`**, **`Card`** — screens use these instead of ad hoc `StyleSheet` colors.
 
 ## Prereqs
 
@@ -27,10 +29,10 @@ Start the API from repo root (`backend/`, default port **3000**) or set a custom
 
 Android **HTTP** dev traffic is allowed via `usesCleartextTraffic` in `app.json`.
 
-## Phase 1 dev flow
+## Dev flow (Phases 1–2)
 
-1. Open app → **Login** skeleton.
-2. Tap **Dev: continue as signed in** → **Home** runs `GET /health`.
+1. Open app → **Login** (themed).
+2. Tap **Dev: continue as signed in** → **Home** runs `GET /health` inside a **`Card`**.
 3. **Log out** clears auth (persisted slice).
 
-Next phases: real auth API, tabs / inner stacks, feature MVVM for send / face / QR per `docs/mobile-plan.md`.
+Next: real auth API, tabs / inner stacks, send / face / QR per `docs/mobile-plan.md`.

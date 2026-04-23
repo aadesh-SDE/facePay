@@ -1,65 +1,49 @@
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { useAppDispatch } from "@/app/hooks";
 import type { RootStackParamList } from "@/app/navigation/types";
 import { setAuthenticated } from "@/features/auth/state/authSlice";
+import { AppButton } from "@/shared/components/AppButton";
+import { AppText } from "@/shared/components/AppText";
+import { Screen } from "@/shared/components/Screen";
+import { useTheme } from "@/shared/theme";
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
 
 export function LoginScreen() {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<Nav>();
+  const { spacing } = useTheme();
 
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>FacePay</Text>
-      <Text style={styles.sub}>Sign in (skeleton)</Text>
-      <Pressable
-        style={styles.primary}
-        onPress={() => dispatch(setAuthenticated(true))}
-      >
-        <Text style={styles.primaryLabel}>Dev: continue as signed in</Text>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate("Signup")}>
-        <Text style={styles.link}>Go to sign up</Text>
-      </Pressable>
-    </View>
+    <Screen scroll>
+      <View style={[styles.stack, { marginTop: spacing["3xl"] }]}>
+        <AppText variant="headline">FacePay</AppText>
+        <AppText variant="body" color="onSurfaceVariant" style={styles.sub}>
+          Sign in (skeleton — Phase 2 design system)
+        </AppText>
+        <AppButton
+          title="Dev: continue as signed in"
+          onPress={() => dispatch(setAuthenticated(true))}
+          variant="primary"
+        />
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => navigation.navigate("Signup")}
+          style={styles.linkHit}
+        >
+          <AppText variant="body" color="primary">
+            Go to sign up
+          </AppText>
+        </Pressable>
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 24,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "700",
-    marginBottom: 8,
-  },
-  sub: {
-    fontSize: 15,
-    color: "#64748b",
-    marginBottom: 24,
-  },
-  primary: {
-    backgroundColor: "#0f172a",
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    marginBottom: 16,
-  },
-  primaryLabel: {
-    color: "#fff",
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  link: {
-    color: "#2563eb",
-    textAlign: "center",
-    fontSize: 15,
-  },
+  stack: { gap: 16 },
+  sub: { marginTop: 4 },
+  linkHit: { alignSelf: "center", paddingVertical: 8 },
 });

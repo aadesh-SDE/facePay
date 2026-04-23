@@ -336,6 +336,8 @@ Map **`frontend/src/app/router.tsx`** paths to RN stacks and **`src/pages/*`** e
 - Theme from stored design tokens (colors, radii, spacing, typography).
 - Primitives: `Screen`, text styles, primary button, input, card.
 
+**Status:** `src/shared/theme/` (`colors`, `spacing`, `radii`, `shadows`, `typography`, `theme`, `ThemeContext`) mirrors web Tailwind palette; **Manrope** loaded in `FontLoader`; primitives in `src/shared/components/` — **`Screen`**, **`AppText`**, **`AppButton`**, **`AppTextField`**, **`Card`**; Login / Signup / Home / placeholders consume them. **`expo-font`** plugin added in `app.json`.
+
 ### Phase 3 — Feature build order
 
 1. Login / Signup  

@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
-  Pressable,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { useAppDispatch } from "@/app/hooks";
 import { logout } from "@/features/auth/state/authSlice";
 import { fetchHealth } from "@/features/home/api/homeApi";
+import { AppButton } from "@/shared/components/AppButton";
+import { AppText } from "@/shared/components/AppText";
+import { Card } from "@/shared/components/Card";
+import { Screen } from "@/shared/components/Screen";
 import { getApiBaseUrl } from "@/shared/config/env";
+import { useTheme } from "@/shared/theme";
 
 export function HomeScreen() {
   const dispatch = useAppDispatch();
+  const { spacing } = useTheme();
   const [health, setHealth] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,49 +45,42 @@ export function HomeScreen() {
   }, []);
 
   return (
-    <View style={styles.root}>
-      <Text style={styles.title}>Home</Text>
-      <Text style={styles.base}>API: {getApiBaseUrl()}</Text>
-      {loading ? (
-        <ActivityIndicator style={styles.spinner} />
-      ) : error ? (
-        <Text style={styles.err}>GET /health — {error}</Text>
-      ) : (
-        <Text style={styles.ok}>GET /health — {health}</Text>
-      )}
-      <Pressable style={styles.outline} onPress={() => dispatch(logout())}>
-        <Text style={styles.outlineLabel}>Log out</Text>
-      </Pressable>
-    </View>
+    <Screen scroll>
+      <View style={[styles.stack, { marginTop: spacing.lg }]}>
+        <AppText variant="headline">Home</AppText>
+        <AppText variant="caption" color="onSurfaceVariant">
+          API: {getApiBaseUrl()}
+        </AppText>
+
+        <Card elevated>
+          <AppText variant="label" color="onSurfaceVariant">
+            Smoke test
+          </AppText>
+          {loading ? (
+            <ActivityIndicator style={styles.spinner} />
+          ) : error ? (
+            <AppText variant="body" color="error" style={styles.bodyGap}>
+              GET /health — {error}
+            </AppText>
+          ) : (
+            <AppText variant="bodySmall" color="onSurface" style={styles.bodyGap}>
+              GET /health — {health}
+            </AppText>
+          )}
+        </Card>
+
+        <AppButton
+          title="Log out"
+          onPress={() => dispatch(logout())}
+          variant="outline"
+        />
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 24,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "700",
-    marginBottom: 8,
-  },
-  base: {
-    fontSize: 12,
-    color: "#64748b",
-    marginBottom: 12,
-  },
-  spinner: { marginVertical: 16 },
-  ok: { fontSize: 14, color: "#0f172a", marginBottom: 24 },
-  err: { fontSize: 14, color: "#b91c1c", marginBottom: 24 },
-  outline: {
-    borderWidth: 1,
-    borderColor: "#cbd5e1",
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: "center",
-  },
-  outlineLabel: { fontWeight: "600" },
+  stack: { gap: 16 },
+  spinner: { marginVertical: 12 },
+  bodyGap: { marginTop: 8 },
 });
