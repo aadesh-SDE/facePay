@@ -1,7 +1,10 @@
 import { useCallback, useState } from "react";
 import { RefreshControl, StyleSheet, View } from "react-native";
+import { useNavigation, type NavigationProp, type ParamListBase } from "@react-navigation/native";
+import { navigateRootStack } from "@/app/navigation/rootNavigation";
+import { useAppDispatch } from "@/app/hooks";
 import { useHomeViewModel } from "@/features/home/viewModel/useHomeViewModel";
-import { useAuthViewModel } from "@/features/auth/viewModel/useAuthViewModel";
+import { resetSend } from "@/features/send/state/sendSlice";
 import { AppButton } from "@/shared/components/AppButton";
 import { AppText } from "@/shared/components/AppText";
 import { Card } from "@/shared/components/Card";
@@ -10,9 +13,10 @@ import { formatCurrency } from "@/shared/utils/formatCurrency";
 import { useTheme } from "@/shared/theme";
 
 export function HomeScreen() {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const { user, balance, recentTransactions, loading, error, refresh } =
     useHomeViewModel();
-  const { logout } = useAuthViewModel();
   const { spacing, colors, radii } = useTheme();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -99,7 +103,13 @@ export function HomeScreen() {
           </View>
         )}
 
-        <AppButton title="Log out" onPress={() => void logout()} variant="outline" />
+        <AppButton
+          title="Send money"
+          onPress={() => {
+            dispatch(resetSend());
+            navigateRootStack(navigation, "SelectRecipient");
+          }}
+        />
       </View>
     </Screen>
   );

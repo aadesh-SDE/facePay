@@ -11,13 +11,23 @@ import {
   persistStore,
 } from "redux-persist";
 import { authReducer } from "@/features/auth/state/authSlice";
+import { faceReducer } from "@/features/faceAuth/state/faceSlice";
+import { historyReducer } from "@/features/history/state/historySlice";
 import { homeReducer } from "@/features/home/state/homeSlice";
+import { profileReducer } from "@/features/profile/state/profileSlice";
+import { receiveReducer } from "@/features/receive/state/receiveSlice";
+import { sendReducer } from "@/features/send/state/sendSlice";
 import { walletReducer } from "@/features/wallet/state/walletSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   home: homeReducer,
   wallet: walletReducer,
+  profile: profileReducer,
+  history: historyReducer,
+  receive: receiveReducer,
+  send: sendReducer,
+  face: faceReducer,
 });
 
 const persistConfig = {

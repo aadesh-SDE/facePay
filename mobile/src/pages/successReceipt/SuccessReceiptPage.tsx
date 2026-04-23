@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { SuccessReceiptScreen } from "@/features/send/screens/SuccessReceiptScreen";
 
 export function SuccessReceiptPage() {
-  return <PlaceholderPage title="Success" />;
+  return <SuccessReceiptScreen />;
 }

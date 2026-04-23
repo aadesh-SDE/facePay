@@ -1,4 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import type { AppDispatch, RootState } from "@/app/store";
+import { resetSessionClientState } from "@/app/sessionCleanup";
 import { loginApi, logoutApi, signupApi } from "@/features/auth/api/authApi";
 import { fetchMeApi } from "@/features/auth/api/profileApi";
 import type {
@@ -56,18 +58,17 @@ export const signupThunk = createAsyncThunk<
   }
 });
 
-export const logoutThunk = createAsyncThunk(
-  "auth/logout",
-  async (_, { dispatch }) => {
+export const logoutThunk = createAsyncThunk<
+  void,
+  void,
+  { state: RootState; dispatch: AppDispatch }
+>("auth/logout", async (_, { dispatch }) => {
     try {
       const token = await getAuthToken();
       if (token) await logoutApi();
     } finally {
       await deleteAuthToken();
-      const home = await import("@/features/home/state/homeSlice");
-      const wallet = await import("@/features/wallet/state/walletSlice");
-      dispatch(home.resetHomeData());
-      dispatch(wallet.resetWallet());
+      resetSessionClientState(dispatch);
     }
   },
 );

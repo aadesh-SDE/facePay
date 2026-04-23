@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { FaceVerificationScreen } from "@/features/faceAuth/screens/FaceVerificationScreen";
 
 export function FaceVerificationPage() {
-  return <PlaceholderPage title="Face verification" />;
+  return <FaceVerificationScreen />;
 }

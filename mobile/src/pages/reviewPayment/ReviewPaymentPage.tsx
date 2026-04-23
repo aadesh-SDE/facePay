@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { ReviewPaymentScreen } from "@/features/send/screens/ReviewPaymentScreen";
 
 export function ReviewPaymentPage() {
-  return <PlaceholderPage title="Review payment" />;
+  return <ReviewPaymentScreen />;
 }

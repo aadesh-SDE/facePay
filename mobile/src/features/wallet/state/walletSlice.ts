@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { TransferResponse } from "@/features/send/types/send.types";
 import type { WalletState } from "@/features/wallet/types/wallet.types";
 import { fetchBalanceThunk } from "@/features/wallet/state/walletThunks";
 
@@ -34,7 +35,14 @@ const walletSlice = createSlice({
       .addCase(fetchBalanceThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Failed to fetch balance";
-      });
+      })
+      .addMatcher(
+        (action): action is { type: string; payload: TransferResponse } =>
+          action.type === "send/submitTransfer/fulfilled",
+        (state, action) => {
+          state.balance = action.payload.newBalance;
+        },
+      );
   },
 });
 

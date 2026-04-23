@@ -4,7 +4,7 @@
 
 **Phase 2:** **Design tokens** in `src/shared/theme/` (colors / spacing / radii / shadows / typography aligned with `frontend/tailwind.config.ts`), **Manrope** via `@expo-google-fonts/manrope` + `expo-font`, **`ThemeProvider`**, primitives **`Screen`**, **`AppText`**, **`AppButton`**, **`AppTextField`**, **`Card`** — screens use these instead of ad hoc `StyleSheet` colors.
 
-**Phase 3 (in progress):** **Login / Signup** call the real backend; **JWT** is stored in **SecureStore** (`fp_token`); **bootstrap** restores the user with **`GET /api/v1/me`**. **Home** shows balance + recent transactions (same APIs as web). Next in this phase: Profile, History, Receive, Send, Face (per `docs/mobile-plan.md`).
+**Phase 3 (complete):** Same auth/bootstrap as before, plus **bottom tabs** (**Home**, **History**, **Receive** → My QR + Scan, **Profile**), **Profile** (`/me`, `/me/security-summary`), **History** (full transaction list + filter/search), **Receive** (QR from API + scan), **Send** (search → amount → review → **biometric verify** → `POST /api/v1/transfers`), **Face template** (demo descriptor + `/me/face-template`). **401 / logout** clear feature state via **`src/app/sessionCleanup.ts`**. See **`docs/mobile-plan.md`** §9 Phase 3.
 
 ## Prereqs
 
@@ -34,8 +34,8 @@ Android **HTTP** dev traffic is allowed via `usesCleartextTraffic` in `app.json`
 ## Dev flow
 
 1. Start **backend** on port **3000** (or set `EXPO_PUBLIC_API_BASE_URL`).
-2. **Bootstrap** shows a brief spinner, then **Login** or **Home** if a token exists in SecureStore.
-3. **Sign in** with real credentials → **Home** loads balance + recent txs; **pull to refresh** refetches.
-4. **Log out** calls **`POST /api/v1/auth/logout`**, clears SecureStore, and resets cached home/wallet state.
+2. **Bootstrap** shows a brief spinner, then **Login** or **main tabs** if a token exists in SecureStore.
+3. **Sign in** with real credentials → **Home** tab loads balance + recent txs; **pull to refresh** refetches.
+4. **Log out** (Profile tab) calls **`POST /api/v1/auth/logout`**, clears SecureStore, and runs **`resetSessionClientState`** (home, wallet, profile, history, receive, send, face).
 
-Next: Profile, History, Receive, Send, Face per `docs/mobile-plan.md`.
+**Plugins:** `app.json` includes **`expo-camera`** permission copy for QR scan.

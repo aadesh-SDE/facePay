@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { EnterAmountScreen } from "@/features/send/screens/EnterAmountScreen";
 
 export function EnterAmountPage() {
-  return <PlaceholderPage title="Enter amount" />;
+  return <EnterAmountScreen />;
 }

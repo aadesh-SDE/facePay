@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { RegisterFaceScreen } from "@/features/faceAuth/screens/RegisterFaceScreen";
 
 export function RegisterFacePage() {
-  return <PlaceholderPage title="Register face" />;
+  return <RegisterFaceScreen />;
 }

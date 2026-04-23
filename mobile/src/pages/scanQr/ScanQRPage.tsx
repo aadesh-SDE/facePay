@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { ScanQRScreen } from "@/features/receive/screens/ScanQRScreen";
 
 export function ScanQRPage() {
-  return <PlaceholderPage title="Scan QR" />;
+  return <ScanQRScreen />;
 }

@@ -23,13 +23,11 @@ apiClient.interceptors.response.use(
   async (error) => {
     if (axios.isAxiosError(error) && error.response?.status === 401) {
       await deleteAuthToken();
-      const { store } = await import("@/app/store");
-      const { clearSession } = await import("@/features/auth/state/authSlice");
-      const { resetHomeData } = await import("@/features/home/state/homeSlice");
-      const { resetWallet } = await import("@/features/wallet/state/walletSlice");
+      const { store } = await import("../../app/store");
+      const { clearSession } = await import("../../features/auth/state/authSlice");
+      const { resetSessionClientState } = await import("../../app/sessionCleanup");
       store.dispatch(clearSession());
-      store.dispatch(resetHomeData());
-      store.dispatch(resetWallet());
+      resetSessionClientState(store.dispatch);
     }
     return Promise.reject(error);
   },

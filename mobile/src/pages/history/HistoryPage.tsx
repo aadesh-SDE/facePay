@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { HistoryScreen } from "@/features/history/screens/HistoryScreen";
 
 export function HistoryPage() {
-  return <PlaceholderPage title="History" />;
+  return <HistoryScreen />;
 }

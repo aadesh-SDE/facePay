@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { VerificationFailedScreen } from "@/features/send/screens/VerificationFailedScreen";
 
 export function VerificationFailedPage() {
-  return <PlaceholderPage title="Verification failed" />;
+  return <VerificationFailedScreen />;
 }

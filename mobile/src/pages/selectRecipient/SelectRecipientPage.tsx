@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/shared/components/PlaceholderPage";
+import { SelectRecipientScreen } from "@/features/send/screens/SelectRecipientScreen";
 
 export function SelectRecipientPage() {
-  return <PlaceholderPage title="Select recipient" />;
+  return <SelectRecipientScreen />;
 }

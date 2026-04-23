@@ -29,7 +29,13 @@
     },
     "plugins": [
       "expo-secure-store",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow FacePay to scan payment QR codes."
+        }
+      ]
     ]
   }
 }
