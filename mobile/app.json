@@ -39,7 +39,8 @@
         {
           "cameraPermission": "Allow FacePay to use the camera for QR payments and face registration."
         }
-      ]
+      ],
+      "@sentry/react-native"
     ]
   }
 }

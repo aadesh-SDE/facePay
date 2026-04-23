@@ -380,6 +380,8 @@ These choices align with common **fintech / mobile** practice (on-device ML Kit�
 - Internal / TestFlight / Play internal track when “installable app” matters.  
 - Minimal **crash reporting** before live investor demos.
 
+**Status (started):** **`docs/mobile-demo-script.md`** — step table + backup recording notes. **`mobile/eas.json`** — `development`, **`preview`** (internal APK / internal iOS), **`production`** profiles for **EAS Build**. **`mobile/metro.config.js`** wraps Expo Metro with **Sentry**. **`mobile/src/app/sentry.ts`** initializes **`@sentry/react-native`** when **`EXPO_PUBLIC_SENTRY_DSN`** is set (`app.config.ts` `extra.sentryDsn`). **`@sentry/react-native`** config plugin in **`app.json`**. See **`mobile/README.md`** Phase 5 for env + `eas init` / `SENTRY_AUTH_TOKEN` on EAS.
+
 ---
 
 ## 10. Optional monorepo follow-up
@@ -401,6 +403,7 @@ When sharing types or API wrappers between `frontend/` and `mobile/`:
 | Web HTTP stack | `frontend/package.json` (axios, RTK, persist) |
 | Backend plan | [`backend-plan.md`](./backend-plan.md) |
 | Frontend plan | [`frontend-plan.md`](./frontend-plan.md) |
+| Mobile investor demo script (Phase 5) | [`mobile-demo-script.md`](./mobile-demo-script.md) |
 
 ---
 

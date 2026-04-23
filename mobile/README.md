@@ -8,6 +8,8 @@
 
 **Phase 4 (started):** **QR** scan UX (torch, haptics, cooldown, focus reset); **face registration** via **front-camera photo** → capture-derived **128-D proxy** → same face-template API; **iOS** privacy strings for camera + Face ID. **Locked follow-up decisions** + **GitHub issue templates:** **`docs/mobile-plan.md`** §9 Phase 4 (*Decisions (locked)*), **`docs/mobile-phase4-tracker.md`**.
 
+**Phase 5 (started):** **Demo script** → [`../docs/mobile-demo-script.md`](../docs/mobile-demo-script.md). **EAS Build** → `eas.json` (`development` dev client, **`preview`** internal APK / internal iOS, **`production`**). First time: install [EAS CLI](https://docs.expo.dev/build/setup/), run **`eas login`** and **`eas init`** in `mobile/` (links Expo project / sets `extra.eas.projectId` in app config when Expo writes it). Example: `npx eas-cli build --profile preview --platform android`. **Sentry:** set **`EXPO_PUBLIC_SENTRY_DSN`** (client DSN from [sentry.io](https://sentry.io)); optional **`SENTRY_AUTH_TOKEN`** in [EAS Secrets](https://docs.expo.dev/build-reference/variables/) for source maps on cloud builds. Without DSN, `src/app/sentry.ts` keeps reporting disabled. See **`docs/mobile-plan.md`** §9 Phase 5.
+
 ## Prereqs
 
 - Node.js (LTS; match [Expo SDK 54](https://docs.expo.dev/) docs)
