@@ -10,7 +10,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    // Keep API on :3000 (backend); avoid clashing with Express default PORT.
+    port: 5173,
     host: true,
   },
 });

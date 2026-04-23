@@ -356,7 +356,7 @@ Map **`frontend/src/app/router.tsx`** paths to RN stacks and **`src/pages/*`** e
 - **Face** capture path that satisfies backend contracts (may differ from web’s face-api implementation).  
 - **Secure auth** end-to-end.
 
-**Status (in progress):** Mobile now treats Phase 4 as an **iteration track** (not a second “big bang” release):
+**Status (first tranche shipped; remainder backlog):** Phase 4 is an **iteration track**. The items below are **in the repo**; optional upgrades follow locked decisions + `mobile-phase4-tracker.md`.
 
 - **QR:** `expo-camera` scan screen adds **torch toggle**, **haptic** success/error feedback (`expo-haptics`), **cooldown** after failed reads, and **focus reset** when returning to the screen. **iOS** `NSCameraUsageDescription` + **`NSFaceIDUsageDescription`** (and Android camera permission via `expo-camera` plugin copy) document camera + Face ID use.
 - **Face:** **Front-camera capture** → JPEG **base64** → deterministic **128-D vector** (`deriveDescriptorFromCaptureBase64` — *embedding proxy*, not ML Kit / face-api parity) → existing **`PUT /api/v1/me/face-template`** flow. Next spikes: optional **vision-camera** if scan UX needs it; **real embeddings** (on-device or server) when backend/contracts extend.
@@ -380,7 +380,7 @@ These choices align with common **fintech / mobile** practice (on-device ML Kit�
 - Internal / TestFlight / Play internal track when “installable app” matters.  
 - Minimal **crash reporting** before live investor demos.
 
-**Status (started):** **`docs/mobile-demo-script.md`** — step table + backup recording notes. **`mobile/eas.json`** — `development`, **`preview`** (internal APK / internal iOS), **`production`** profiles for **EAS Build**. **`mobile/metro.config.js`** wraps Expo Metro with **Sentry**. **`mobile/src/app/sentry.ts`** initializes **`@sentry/react-native`** when **`EXPO_PUBLIC_SENTRY_DSN`** is set (`app.config.ts` `extra.sentryDsn`). **`@sentry/react-native`** config plugin in **`app.json`**. See **`mobile/README.md`** Phase 5 for env + `eas init` / `SENTRY_AUTH_TOKEN` on EAS.
+**Status (scaffold complete):** Repo includes **`docs/mobile-demo-script.md`**, **`mobile/eas.json`**, **Sentry** (`metro.config.js`, `src/app/sentry.ts`, plugin, `EXPO_PUBLIC_SENTRY_DSN`). **You still run** `eas login` / `eas init`, set secrets, and produce builds when needed — that is **ops**, not missing source. Details: **`mobile/README.md`** Phase 5.
 
 ---
 

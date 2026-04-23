@@ -21,9 +21,19 @@ Industry stack for high-volume QR in native apps often uses **Google ML Kit** (A
 
 ### Acceptance criteria
 
-- [ ] Document **exit criteria** for re-evaluating (e.g. “>X% failed scans in Y sessions” or pilot merchant blockers)—add a short subsection to `docs/mobile-plan.md` or this file.
+- [x] Document **exit criteria** for re-evaluating — see **“QR scan — exit criteria”** below (locked for this repo).
 - [ ] If criteria are met: spike **`react-native-vision-camera`** (or document why ML Kit direct integration / commercial SDK was chosen instead).
 - [ ] If criteria are not met: close with **“no change”** and link to last test date.
+
+### QR scan — exit criteria (locked)
+
+Re-open the **vision-camera / commercial SDK** decision only if **any** of the following is true after structured dogfood (log counts in a spreadsheet or issue):
+
+1. **Failure rate:** **≥ 15%** of scan attempts fail in **normal** lighting with a **valid** FacePay QR (same device/OS build), over a sample of **≥ 20** attempts across **≥ 3** sessions; **or**
+2. **Latency / UX:** median time-to-success **> 8 s** repeatedly; **or**
+3. **Pilot:** an external pilot **explicitly** requires enterprise scanning (damaged codes, extreme angles).
+
+Until then, **`expo-camera`** remains the default (see `mobile-plan.md` Phase 4 decisions table).
 
 ### Out of scope (for this issue)
 
@@ -96,7 +106,7 @@ Industry norm for consumer/financial apps: **short-lived access** + **rotating r
 
 | # | Workstream | Owner | Status |
 |---|------------|-------|--------|
-| 1 | QR exit criteria + optional vision-camera spike | TBD | Not started |
+| 1 | QR exit criteria + optional vision-camera spike | TBD | **Criteria documented** — spike only if metrics hit thresholds |
 | 2 | Face quality gate + backend/vendor plan | TBD | Not started |
 | 3 | Refresh API + mobile wiring | TBD | Blocked on backend |
 
