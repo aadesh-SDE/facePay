@@ -11,28 +11,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.facepay.android.BuildConfig
+import com.facepay.android.core.designsystem.theme.FpSpacing
 
 @Composable
 fun RootNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Auth,
+        startDestination = Routes.AUTH,
     ) {
-        composable(Routes.Auth) {
+        composable(Routes.AUTH) {
             AuthPlaceholderScreen(
                 apiBaseUrl = BuildConfig.API_BASE_URL,
-                onContinueToMain = { navController.navigate(Routes.Main) },
+                onContinueToMain = { navController.navigate(Routes.MAIN) },
             )
         }
-        composable(Routes.Main) {
+        composable(Routes.MAIN) {
             MainPlaceholderScreen(
                 onSignOut = {
-                    navController.popBackStack(Routes.Auth, inclusive = false)
+                    navController.popBackStack(Routes.AUTH, inclusive = false)
                 },
             )
         }
@@ -49,9 +49,10 @@ private fun AuthPlaceholderScreen(
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(FpSpacing.xxl),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -63,17 +64,17 @@ private fun AuthPlaceholderScreen(
             Text(
                 text = "Auth (placeholder)",
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = FpSpacing.sm),
             )
             Text(
                 text = "API: $apiBaseUrl",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 16.dp),
+                modifier = Modifier.padding(top = FpSpacing.lg),
             )
             Button(
                 onClick = onContinueToMain,
-                modifier = Modifier.padding(top = 24.dp),
+                modifier = Modifier.padding(top = FpSpacing.xxl),
             ) {
                 Text("Open main shell (placeholder)")
             }
@@ -88,9 +89,10 @@ private fun MainPlaceholderScreen(onSignOut: () -> Unit) {
         color = MaterialTheme.colorScheme.background,
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(FpSpacing.xxl),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -98,7 +100,7 @@ private fun MainPlaceholderScreen(onSignOut: () -> Unit) {
                 text = "Main (placeholder)",
                 style = MaterialTheme.typography.headlineSmall,
             )
-            Button(onClick = onSignOut, modifier = Modifier.padding(top = 24.dp)) {
+            Button(onClick = onSignOut, modifier = Modifier.padding(top = FpSpacing.xxl)) {
                 Text("Back to auth")
             }
         }

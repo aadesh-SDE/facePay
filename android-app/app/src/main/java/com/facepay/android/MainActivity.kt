@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.facepay.android.ui.theme.FacePayTheme
+import com.facepay.android.core.designsystem.theme.FacePayTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

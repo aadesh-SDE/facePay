@@ -1,3 +1,7 @@
 # Copy to local.properties (do not commit local.properties).
 # Android Studio usually creates local.properties automatically.
 sdk.dir=/path/to/Android/sdk
+
+# Optional: debug-only backend override (scheme required, no trailing slash unless you mean it).
+# Overrides default https://facepay-inrz.onrender.com for debug builds only.
+# facepay.apiBaseUrl=http://10.0.2.2:3000

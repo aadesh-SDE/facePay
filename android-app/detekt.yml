@@ -1,0 +1,27 @@
+# Detekt baseline for FacePay Android. See docs/android-plan.md §4.4.
+config:
+  validation: true
+
+build:
+  maxIssues: 0
+
+complexity:
+  LongParameterList:
+    ignoreDefaultParameters: true
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - 'Composable'
+
+style:
+  MaxLineLength:
+    active: true
+    maxLineLength: 140
+  WildcardImport:
+    active: false
+  MagicNumber:
+    excludes:
+      - '**/core/designsystem/theme/Color.kt'
+      - '**/core/designsystem/theme/FpCornerRadius.kt'
+

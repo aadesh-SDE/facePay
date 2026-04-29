@@ -1,3 +1,6 @@
+import com.android.build.api.dsl.ApplicationBuildType
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,7 +8,22 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.ktlint)
 }
+
+val localProperties =
+    Properties().apply {
+        val f = rootProject.file("local.properties")
+        if (f.exists()) {
+            f.inputStream().use { load(it) }
+        }
+    }
+
+fun debugApiBaseUrl(): String =
+    localProperties.getProperty("facepay.apiBaseUrl")?.trim()?.takeIf { it.isNotEmpty() }
+        ?: System.getenv("FACEPAY_API_BASE_URL")?.trim()?.takeIf { it.isNotEmpty() }
+        ?: "https://facepay-inrz.onrender.com"
 
 android {
     namespace = "com.facepay.android"
@@ -26,7 +44,7 @@ android {
 
     buildTypes {
         debug {
-            configureApiBaseUrl(this, "https://facepay-inrz.onrender.com")
+            configureApiBaseUrl(this, debugApiBaseUrl())
         }
         release {
             isMinifyEnabled = true
@@ -53,8 +71,31 @@ android {
     }
 }
 
-fun configureApiBaseUrl(buildType: com.android.build.api.dsl.ApplicationBuildType, url: String) {
-    buildType.buildConfigField("String", "API_BASE_URL", "\"$url\"")
+fun configureApiBaseUrl(
+    buildType: ApplicationBuildType,
+    url: String,
+) {
+    buildType.buildConfigField(
+        "String",
+        "API_BASE_URL",
+        "\"$url\"",
+    )
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom(rootProject.file("detekt.yml"))
+    parallel = true
+}
+
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+}
+
+tasks.named("check") {
+    dependsOn("detekt", "ktlintCheck")
 }
 
 dependencies {
