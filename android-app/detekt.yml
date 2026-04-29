@@ -25,10 +25,12 @@ style:
     active: false
   MagicNumber:
     excludes:
+      - '**/src/test/**'
       - '**/core/designsystem/theme/Color.kt'
       - '**/core/designsystem/theme/FpCornerRadius.kt'
       - '**/core/network/ApiErrorMapper.kt'
       - '**/core/network/NetworkModule.kt'
       - '**/core/network/UnauthorizedInterceptor.kt'
+      - '**/core/session/SessionRepositoryImpl.kt'
       - '**/feature/auth/domain/validation/InputValidators.kt'
 

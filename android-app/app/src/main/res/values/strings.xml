@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FacePay</string>
+    <string name="bootstrap_failed_title">We couldn\'t load your account</string>
+    <string name="bootstrap_failed_message_network">Check your internet connection and try again.</string>
+    <string name="bootstrap_failed_message_server">Something went wrong on our side. Please try again in a moment.</string>
+    <string name="bootstrap_failed_retry">Try again</string>
+    <string name="bootstrap_failed_use_another_account">Use another account</string>
 </resources>

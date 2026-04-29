@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-// Manrope/Poppins load in Phase 1; use sans-serif until font resources ship.
+// Manrope/Poppins (plan §3.3): ship font resources or Google Font provider in a later phase; sans-serif for now.
 private val DefaultFontFamily = FontFamily.SansSerif
 
 val FacePayTypography =

@@ -32,4 +32,10 @@ class SessionViewModel
                 sessionRepository.bootstrap()
             }
         }
+
+        fun discardLocalSession() {
+            viewModelScope.launch {
+                sessionRepository.discardLocalSession()
+            }
+        }
     }

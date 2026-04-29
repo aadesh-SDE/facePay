@@ -31,6 +31,8 @@ object NetworkModule {
     @Singleton
     fun loggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
+            // Plan §7.5: never log bearer tokens even in debug builds.
+            redactHeader("Authorization")
             level =
                 if (BuildConfig.DEBUG) {
                     HttpLoggingInterceptor.Level.BODY

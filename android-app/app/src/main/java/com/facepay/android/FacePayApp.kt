@@ -9,6 +9,7 @@ import com.facepay.android.core.session.SessionUiState
 import com.facepay.android.feature.auth.presentation.SessionViewModel
 import com.facepay.android.feature.main.presentation.MainHomeScreen
 import com.facepay.android.navigation.AuthNavHost
+import com.facepay.android.navigation.BootstrapFailedScreen
 import com.facepay.android.navigation.SplashScreen
 
 @Composable
@@ -21,6 +22,13 @@ fun FacePayApp(sessionViewModel: SessionViewModel = hiltViewModel()) {
             MainHomeScreen(
                 user = s.user,
                 onLogout = sessionViewModel::logout,
+            )
+        is SessionUiState.BootstrapFailed ->
+            BootstrapFailedScreen(
+                reason = s.reason,
+                onRetry = sessionViewModel::retryBootstrap,
+                onUseAnotherAccount = sessionViewModel::discardLocalSession,
+                modifier = Modifier,
             )
     }
 }
