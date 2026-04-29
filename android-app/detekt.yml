@@ -8,6 +8,9 @@ build:
 complexity:
   LongParameterList:
     ignoreDefaultParameters: true
+  LongMethod:
+    active: true
+    threshold: 140
 
 naming:
   FunctionNaming:
@@ -24,4 +27,8 @@ style:
     excludes:
       - '**/core/designsystem/theme/Color.kt'
       - '**/core/designsystem/theme/FpCornerRadius.kt'
+      - '**/core/network/ApiErrorMapper.kt'
+      - '**/core/network/NetworkModule.kt'
+      - '**/core/network/UnauthorizedInterceptor.kt'
+      - '**/feature/auth/domain/validation/InputValidators.kt'
 

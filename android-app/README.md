@@ -4,6 +4,8 @@ Native Android client (Kotlin, Jetpack Compose). Open this folder in Android Stu
 
 Phase 0 delivers a bootable app with navigation placeholders, Material 3 theme tokens aligned with the web Tailwind palette, and `BuildConfig.API_BASE_URL` pointing at the deployed backend.
 
+**Phase 1** adds login/signup against `/api/v1/auth/*`, encrypted token storage, `GET /api/v1/me` bootstrap, bearer auth + 401 handling (mirrors web `api.ts`), and a minimal authenticated home shell with logout.
+
 ## SDK path
 
 Gradle needs the Android SDK. Either open the project in Android Studio (it writes `local.properties`) or copy `local.properties.example` to `local.properties` and set `sdk.dir` to your SDK (on Windows, often `%LOCALAPPDATA%\\Android\\Sdk`).

@@ -1,6 +1,6 @@
 package com.facepay.android.navigation
 
 object Routes {
-    const val AUTH = "auth"
-    const val MAIN = "main"
+    const val LOGIN = "login"
+    const val SIGNUP = "signup"
 }
