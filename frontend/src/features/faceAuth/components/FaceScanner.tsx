@@ -3,16 +3,11 @@ import { useCamera } from "@/shared/hooks/useCamera";
 import {
   loadFaceModels,
   detectFace,
-  calculateEAR,
-  createBlinkTracker,
-  updateBlinkTracker,
   compareDescriptors,
   descriptorToArray,
   arrayToDescriptor,
-  type BlinkTracker,
 } from "@/shared/services/faceService";
 import { ScannerRing } from "./ScannerRing";
-import { BlinkDetector } from "./BlinkDetector";
 import type { VerifyStatus } from "../types/face.types";
 
 interface FaceScannerProps {
@@ -21,9 +16,6 @@ interface FaceScannerProps {
   onDescriptorCaptured?: (descriptor: number[]) => void;
   onVerificationComplete?: (success: boolean) => void;
   onStatusChange?: (status: VerifyStatus) => void;
-  onBlinkCountChange?: (count: number) => void;
-  requiredBlinks?: number;
-  blinkTimeoutSeconds?: number;
 }
 
 export function FaceScanner({
@@ -32,19 +24,13 @@ export function FaceScanner({
   onDescriptorCaptured,
   onVerificationComplete,
   onStatusChange,
-  onBlinkCountChange,
-  requiredBlinks = 2,
-  blinkTimeoutSeconds = 10,
 }: FaceScannerProps) {
   const { videoRef, error: cameraError, isActive, start, stop } = useCamera();
   const [status, setStatus] = useState<VerifyStatus>("idle");
-  const [blinkCount, setBlinkCount] = useState(0);
   const [feedback, setFeedback] = useState("Initializing...");
   const [modelsReady, setModelsReady] = useState(false);
 
   const animFrameRef = useRef<number>(0);
-  const blinkTrackerRef = useRef<BlinkTracker>(createBlinkTracker());
-  const blinkTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const completedRef = useRef(false);
 
   const updateStatus = useCallback(
@@ -53,14 +39,6 @@ export function FaceScanner({
       onStatusChange?.(s);
     },
     [onStatusChange],
-  );
-
-  const updateBlinks = useCallback(
-    (count: number) => {
-      setBlinkCount(count);
-      onBlinkCountChange?.(count);
-    },
-    [onBlinkCountChange],
   );
 
   useEffect(() => {
@@ -82,7 +60,9 @@ export function FaceScanner({
       }
     }
     init();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [updateStatus]);
 
   useEffect(() => {
@@ -136,7 +116,7 @@ export function FaceScanner({
     };
   }, [mode, isActive, modelsReady, videoRef, updateStatus, onDescriptorCaptured]);
 
-  // Verification detection loop
+  // Verification: proceed on face match (no blink liveness)
   useEffect(() => {
     if (mode !== "verify" || !isActive || !modelsReady || completedRef.current) return;
     if (!storedDescriptor) {
@@ -146,10 +126,9 @@ export function FaceScanner({
     }
 
     let running = true;
-    let matched = false;
 
     async function detectLoop() {
-      if (!running || !videoRef.current) return;
+      if (!running || !videoRef.current || completedRef.current) return;
 
       const result = await detectFace(videoRef.current);
       if (!running) return;
@@ -162,54 +141,22 @@ export function FaceScanner({
         return;
       }
 
-      if (!matched) {
-        const comparison = compareDescriptors(
-          arrayToDescriptor(storedDescriptor!),
-          result.descriptor,
-        );
+      const comparison = compareDescriptors(
+        arrayToDescriptor(storedDescriptor!),
+        result.descriptor,
+      );
 
-        if (comparison.match) {
-          matched = true;
-          updateStatus("blink_pending");
-          setFeedback("Face matched! Blink twice to confirm");
-          blinkTrackerRef.current = createBlinkTracker();
-          updateBlinks(0);
-
-          blinkTimerRef.current = setTimeout(() => {
-            if (running && !completedRef.current) {
-              completedRef.current = true;
-              updateStatus("failed");
-              setFeedback("Blink timeout. Please try again.");
-              onVerificationComplete?.(false);
-            }
-          }, blinkTimeoutSeconds * 1000);
-        } else {
-          setFeedback("Face not recognized. Adjust position.");
-        }
+      if (comparison.match) {
+        completedRef.current = true;
+        updateStatus("success");
+        setFeedback("Face matched! Processing payment...");
+        onVerificationComplete?.(true);
+        return;
       }
 
-      if (matched && !completedRef.current) {
-        const ear = calculateEAR(result.landmarks);
-        blinkTrackerRef.current = updateBlinkTracker(
-          blinkTrackerRef.current,
-          ear.min,
-        );
-        const currentBlinks = blinkTrackerRef.current.blinkCount;
-        updateBlinks(currentBlinks);
-
-        if (currentBlinks >= requiredBlinks) {
-          completedRef.current = true;
-          clearTimeout(blinkTimerRef.current);
-          updateStatus("success");
-          setFeedback("Verification successful!");
-          onVerificationComplete?.(true);
-          return;
-        }
-      }
-
-      const pollMs = matched ? 50 : 100;
+      setFeedback("Face not recognized. Adjust position.");
       animFrameRef.current = requestAnimationFrame(() => {
-        setTimeout(detectLoop, pollMs);
+        setTimeout(detectLoop, 200);
       });
     }
 
@@ -218,25 +165,26 @@ export function FaceScanner({
     return () => {
       running = false;
       cancelAnimationFrame(animFrameRef.current);
-      clearTimeout(blinkTimerRef.current);
     };
   }, [
-    mode, isActive, modelsReady, storedDescriptor, videoRef,
-    updateStatus, updateBlinks, onVerificationComplete,
-    requiredBlinks, blinkTimeoutSeconds,
+    mode,
+    isActive,
+    modelsReady,
+    storedDescriptor,
+    videoRef,
+    updateStatus,
+    onVerificationComplete,
   ]);
 
   useEffect(() => {
     return () => {
       stop();
       cancelAnimationFrame(animFrameRef.current);
-      clearTimeout(blinkTimerRef.current);
     };
   }, [stop]);
 
   return (
     <div className="relative flex flex-col items-center">
-      {/* Camera viewport */}
       <div className="relative w-72 h-72 flex items-center justify-center">
         <video
           ref={videoRef}
@@ -246,19 +194,16 @@ export function FaceScanner({
           style={{ transform: "scaleX(-1)" }}
         />
 
-        {/* Overlay scrim with cutout */}
         <div className="absolute inset-0 z-10 bg-primary/30 backdrop-blur-[2px] biometric-overlay rounded-full" />
 
-        {/* Scanner ring */}
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <ScannerRing status={status} size={288} />
         </div>
       </div>
 
-      {/* Feedback card */}
       <div className="mt-8 w-full max-w-sm">
         <div className="bg-surface-container-lowest/80 backdrop-blur-md px-6 py-4 rounded-3xl shadow-whisper text-center">
-          {(status === "scanning" || status === "blink_pending" || status === "loading_models") && (
+          {(status === "scanning" || status === "loading_models") && (
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse" />
               <p className="text-on-surface-variant font-semibold tracking-wide uppercase text-[10px]">
@@ -269,7 +214,10 @@ export function FaceScanner({
 
           {status === "success" && (
             <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-secondary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
+              <span
+                className="material-symbols-outlined text-secondary text-lg"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >
                 check_circle
               </span>
               <p className="text-secondary font-semibold tracking-wide uppercase text-[10px]">
@@ -280,7 +228,10 @@ export function FaceScanner({
 
           {status === "failed" && (
             <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-error text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
+              <span
+                className="material-symbols-outlined text-error text-lg"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >
                 error
               </span>
               <p className="text-error font-semibold tracking-wide uppercase text-[10px]">
@@ -290,16 +241,6 @@ export function FaceScanner({
           )}
 
           <h2 className="text-on-surface font-bold text-lg mb-1">{feedback}</h2>
-
-          {status === "blink_pending" && (
-            <div className="mt-3 flex justify-center">
-              <BlinkDetector
-                blinkCount={blinkCount}
-                requiredBlinks={requiredBlinks}
-                isActive
-              />
-            </div>
-          )}
         </div>
 
         {cameraError && (

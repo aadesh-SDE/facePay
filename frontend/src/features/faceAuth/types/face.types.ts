@@ -3,7 +3,6 @@ export type VerifyStatus =
   | "loading_models"
   | "scanning"
   | "matched"
-  | "blink_pending"
   | "success"
   | "failed";
 
@@ -11,7 +10,6 @@ export interface FaceState {
   registered: boolean;
   descriptor: number[] | null;
   verifyStatus: VerifyStatus;
-  blinkCount: number;
   attempts: number;
   maxAttempts: number;
   error: string | null;

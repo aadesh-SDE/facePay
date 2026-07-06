@@ -6,7 +6,6 @@ const initialState: FaceState = {
   registered: false,
   descriptor: null,
   verifyStatus: "idle",
-  blinkCount: 0,
   attempts: 0,
   maxAttempts: 3,
   error: null,
@@ -19,18 +18,11 @@ const faceSlice = createSlice({
     setVerifyStatus(state, action: PayloadAction<VerifyStatus>) {
       state.verifyStatus = action.payload;
     },
-    incrementBlinkCount(state) {
-      state.blinkCount++;
-    },
-    resetBlinkCount(state) {
-      state.blinkCount = 0;
-    },
     incrementAttempts(state) {
       state.attempts++;
     },
     resetVerification(state) {
       state.verifyStatus = "idle";
-      state.blinkCount = 0;
     },
     resetAllFaceState() {
       return initialState;
@@ -66,8 +58,6 @@ const faceSlice = createSlice({
 
 export const {
   setVerifyStatus,
-  incrementBlinkCount,
-  resetBlinkCount,
   incrementAttempts,
   resetVerification,
   resetAllFaceState,

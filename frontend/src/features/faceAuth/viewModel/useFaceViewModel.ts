@@ -5,8 +5,6 @@ import type { VerifyStatus } from "../types/face.types";
 import { registerFaceThunk, loadDescriptorThunk } from "../state/faceThunks";
 import {
   setVerifyStatus,
-  incrementBlinkCount,
-  resetBlinkCount,
   incrementAttempts,
   resetVerification,
   resetAllFaceState,
@@ -29,16 +27,6 @@ export function useFaceViewModel() {
 
   const updateStatus = useCallback(
     (status: VerifyStatus) => dispatch(setVerifyStatus(status)),
-    [dispatch],
-  );
-
-  const addBlink = useCallback(
-    () => dispatch(incrementBlinkCount()),
-    [dispatch],
-  );
-
-  const resetBlinks = useCallback(
-    () => dispatch(resetBlinkCount()),
     [dispatch],
   );
 
@@ -67,8 +55,6 @@ export function useFaceViewModel() {
     registerFace,
     loadDescriptor,
     updateStatus,
-    addBlink,
-    resetBlinks,
     addAttempt,
     resetVerify,
     resetAll,
